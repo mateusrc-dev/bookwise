@@ -2,11 +2,17 @@ import Close from "@/components/Close";
 import Input from "@/components/Input";
 import Link from "@/components/Link";
 import Navigation from "@/components/Navigation";
+import Tag from "@/components/Tag";
 
 export default function Home() {
   return (
     <>
       <h1>Home</h1>
+      <div style={{ display: "flex" }}>
+        <Tag title="Computação" />
+        <Tag title="Sou lindo" />
+        <Tag title="todos somos lindos" />
+      </div>
       <div style={{ display: "flex" }}>
         <Input placeholder="oie" />
         <Input placeholder="teste" />
