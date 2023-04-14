@@ -17,6 +17,15 @@ export default function Home() {
         description="melhor livro do melhor autor dkfhdjh kjashf kldhfk hsdlf hslkdfh lskdfhlkh kdh lksjfhl kjdhflk jhlfkh lksdhflk hflksdh lkshfk hslkdfh sklfhkl jdhfkjh kjfh klshflk hfklsh dj"
         nameBook="como eu sou lindo"
       />
+       <Card
+        src={ImageBookText}
+        assessment={3}
+        author="Mateus Raimundo"
+        description="melhor livro do melhor autor dkfhdjh kjashf kldhfk hsdlf hslkdfh lskdfhlkh kdh lksjfhl kjdhflk jhlfkh lksdhflk hflksdh lkshfk hslkdfh sklfhkl jdhfkjh kjfh klshflk hfklsh dj sdhasdhlskhd lasdhlSDH LAsdh LASKDH askjdh askdhasdkasjd ASKLDH Alskdh dadsfh jdkfh ksdjhf ksdfh ksdfh ksdhfk sjh"
+        nameBook="como eu sou lindo"
+        cardWithUser={true}
+        userName="Mateus"
+      />
       <Card
         src={ImageBookText}
         assessment={4}

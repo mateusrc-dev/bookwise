@@ -1,5 +1,6 @@
 import { styled } from "@/styles";
 import Image from "next/image";
+import Link from "next/link";
 
 export const ContainerCard = styled("div", {
   display: "flex",
@@ -18,6 +19,21 @@ export const ContainerCard = styled("div", {
   "&:hover": {
     borderColor: "$gray500",
   },
+});
+
+export const ContainerCardWithUser = styled("div", {
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  padding: "1.25rem 1.5rem",
+  gap: "1.5rem",
+  width: "var(--type-card-width)",
+  background: "var(--type-card-background)",
+  borderRadius: "8px",
+  borderWidth: "2px",
+  borderStyle: "solid",
+  borderColor: "transparent",
 });
 
 export const ImageColumn = styled(Image, {
@@ -81,5 +97,67 @@ export const DetailsBook = styled("main", {
     fontSize: "$sm",
     lineHeight: "$base",
     color: "$gray300",
+  },
+});
+
+export const DetailsBookWithUser = styled("main", {
+  h1: {
+    fontFamily: "$default",
+    fontWeight: "$bold",
+    fontSize: "$md",
+    lineHeight: "$short",
+    color: "$gray100",
+  },
+  ".author": {
+    fontFamily: "$default",
+    fontWeight: "$regular",
+    fontSize: "$sm",
+    lineHeight: "$base",
+    color: "$gray400",
+    marginBottom: "1.875rem",
+  },
+  ".description": {
+    display: "var(--show-text)",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    "-webkit-line-clamp": 4,
+    "-webkit-box-orient": "vertical",
+    fontFamily: "$default",
+    fontWeight: "$regular",
+    fontSize: "$sm",
+    lineHeight: "$base",
+    color: "$gray300",
+  },
+});
+
+export const HeaderWithUser = styled("div", {
+  width: "100%",
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "space-between",
+});
+
+export const BodyWithUser = styled("div", {
+  display: "flex",
+  alignItems: "flex-start",
+  gap: "1.25rem",
+});
+
+export const ShowMoreText = styled("a", {
+  position: "absolute",
+  bottom: "0px",
+  right: "10px",
+  whiteSpace: "nowrap",
+  cursor: "pointer",
+  borderWidth: "1px",
+  borderStyle: "solid",
+  borderColor: "transparent",
+  fontFamily: "$default",
+  fontWeight: "$bold",
+  fontSize: "$sm",
+  lineHeight: "$base",
+  color: "$purple100",
+  "&:hover": {
+    borderBottomColor: "$purple100",
   },
 });
