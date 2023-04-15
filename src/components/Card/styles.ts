@@ -2,7 +2,7 @@ import { styled } from "@/styles";
 import Image from "next/image";
 import Link from "next/link";
 
-export const ContainerCard = styled("div", {
+export const ContainerCard = styled("button", {
   display: "flex",
   flexDirection: "row",
   alignItems: "flex-start",
@@ -21,7 +21,7 @@ export const ContainerCard = styled("div", {
   },
 });
 
-export const ContainerCardWithUser = styled("div", {
+export const ContainerCardWithUser = styled("button", {
   position: "relative",
   display: "flex",
   flexDirection: "column",

@@ -15,7 +15,7 @@ import ImageText from "../assets/arquitetura-limpa.png";
 import { useState } from "react";
 
 export default function Home() {
-  const [loggedInUser, setLoggedInUser] = useState<boolean>(false);
+  const [loggedInUser, setLoggedInUser] = useState<boolean>(true);
 
   return (
     <HomeContainer>
