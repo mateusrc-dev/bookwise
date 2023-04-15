@@ -144,9 +144,6 @@ export const BodyWithUser = styled("div", {
 });
 
 export const ShowMoreText = styled("a", {
-  position: "absolute",
-  bottom: "0px",
-  right: "10px",
   whiteSpace: "nowrap",
   cursor: "pointer",
   borderWidth: "1px",

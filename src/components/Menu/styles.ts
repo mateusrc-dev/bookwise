@@ -4,7 +4,7 @@ import Link from "next/link";
 export const MenuContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
-  alignItems: "flex-start",
+  alignItems: "center",
   padding: "2.5rem 3.25rem",
   width: "15.75rem",
   height: "61.75rem",

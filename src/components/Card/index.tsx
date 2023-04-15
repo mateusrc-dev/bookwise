@@ -15,7 +15,7 @@ import {
 import { Star } from "phosphor-react";
 import ImageTest from "../../assets/entendendo-algoritmos.png";
 import { useState } from "react";
-import ShowMore from "react-show-more";
+// import ShowMore from "react-show-more";
 
 type Props = {
   src: StaticImageData;
@@ -26,6 +26,7 @@ type Props = {
   type?: "big" | "small";
   cardWithUser?: boolean;
   userName?: string;
+  userImage?: StaticImageData;
 };
 
 export default function Card({
@@ -37,6 +38,7 @@ export default function Card({
   userName = "Passe a propriedade 'userName' para inserir o nome do usuário!",
   type = "big",
   cardWithUser = false,
+  userImage = ImageTest,
 }: Props) {
   const [showText, setShowText] = useState<boolean>(true);
 
@@ -77,7 +79,7 @@ export default function Card({
               }}
             >
               <Image
-                src={ImageTest}
+                src={userImage}
                 alt="imagem do usuário"
                 width={40}
                 height={40}
@@ -172,21 +174,38 @@ export default function Card({
               <p style={{ marginBottom: "20px" }} className="author">
                 {author}
               </p>
-              {description.length > 262 ? (
+              {description.length > 262 && showText ? (
                 <div
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    alignItems: "flex-end",
                   }}
                 >
-                  <span className="description">{description}</span>
-                  <ShowMoreText onClick={handleShowMoreText}>
-                    {showText ? "ver mais" : "ver menos"}
-                  </ShowMoreText>
+                  <span className="description">
+                    {description.slice(0, -50)}...{" "}
+                    {showText && (
+                      <ShowMoreText onClick={handleShowMoreText}>
+                        ver mais
+                      </ShowMoreText>
+                    )}
+                  </span>
                 </div>
               ) : (
-                <p className="description">{description}</p>
+                <span
+                  className="description"
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    flexDirection: "column",
+                  }}
+                >
+                  {description}{" "}
+                  {!showText && (
+                    <ShowMoreText onClick={handleShowMoreText}>
+                      ver menos
+                    </ShowMoreText>
+                  )}
+                </span>
               )}
             </DetailsBookWithUser>
           </DetailsColumn>
