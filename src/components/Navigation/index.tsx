@@ -1,13 +1,15 @@
+import { ReactNode } from "react";
 import { Div, NavigationContainer } from "./styles";
-import { ChartLineUp } from "phosphor-react";
 
 type NavigationProps = {
   title: string;
   selected?: boolean;
+  children?: ReactNode;
 };
 
 export default function Navigation({
   title,
+  children,
   selected = false,
 }: NavigationProps) {
   return (
@@ -18,7 +20,7 @@ export default function Navigation({
       href=""
     >
       {selected === true && <Div />}
-      <ChartLineUp size={24} color="#F8F9FC" />
+      {children}
       <p>{title}</p>
     </NavigationContainer>
   );

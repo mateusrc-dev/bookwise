@@ -15,6 +15,7 @@ import {
 import { Star } from "phosphor-react";
 import ImageTest from "../../assets/entendendo-algoritmos.png";
 import { useState } from "react";
+import ShowMore from "react-show-more";
 
 type Props = {
   src: StaticImageData;
@@ -171,11 +172,17 @@ export default function Card({
               <p style={{ marginBottom: "20px" }} className="author">
                 {author}
               </p>
-              {description.length > 200 ? (
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-end" }}>
+              {description.length > 262 ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "flex-end",
+                  }}
+                >
                   <span className="description">{description}</span>
                   <ShowMoreText onClick={handleShowMoreText}>
-                    {showText ? "Ver mais" : "Ver menos"}
+                    {showText ? "ver mais" : "ver menos"}
                   </ShowMoreText>
                 </div>
               ) : (

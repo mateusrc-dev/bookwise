@@ -19,9 +19,11 @@
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-show-more": "^2.0.0",
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@types/react-show-more": "^2.0.3",
     "@types/react-show-more-text": "^1.4.2"
   }
 }
