@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { styled } from "..";
 
 export const ExplorerContainer = styled("div", {
@@ -70,6 +71,39 @@ export const ExplorerContainer = styled("div", {
       },
     },
   },
+  ".modalLogin": {
+    width: "100%",
+    position: "absolute",
+    zIndex: 3,
+    top: 0,
+    left: 0,
+    minHeight: "100vh",
+    background: "rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    ".modalContentLogin": {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "3.5rem 4.5rem",
+      gap: "$10",
+      width: "32.25rem",
+      height: "21rem",
+      backgroundColor: "$gray700",
+      boxShadow: `4px 16px 24px rgba(0, 0, 0, 0.25)`,
+      borderRadius: "12px",
+      position: "relative",
+      ".close": {
+        position: "absolute",
+        top: "1rem",
+        right: "1rem",
+        background: "none",
+        border: "none",
+      },
+    },
+  },
   ".none": {
     display: "none",
   },
@@ -132,7 +166,6 @@ export const Stars = styled("div", {
   display: "flex",
   alignItems: "center",
   gap: "0.375rem",
-  marginTop: "6.875rem",
 });
 
 export const ToAssess = styled("div", {
@@ -153,4 +186,91 @@ export const ContainerComments = styled("div", {
   flexDirection: "column",
   alignItems: "center",
   gap: "0.75rem",
+});
+
+export const OptionsSignIn = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  gap: "$4",
+});
+
+export const Option = styled(Link, {
+  backgroundColor: "$gray600",
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: "$5",
+  padding: "1.25rem 1.5rem",
+  textDecoration: "none",
+  width: "23.25rem",
+  borderRadius: "8px",
+  strong: {
+    fontFamily: "$default",
+    fontWeight: "$bold",
+    fontSize: "$lg",
+    lineHeight: "$base",
+    color: "$gray200",
+  },
+  "&:hover": {
+    filter: "brightness(0.8)",
+  },
+});
+
+export const CreateNewComment = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  padding: "1.5rem",
+  gap: "1.5rem",
+  width: "35.25rem",
+  background: "$gray700",
+  borderRadius: "8px",
+});
+
+export const HeaderOfCreateNewComment = styled("header", {
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+});
+
+export const TextArea = styled("div", {
+  position: "relative",
+  textarea: {
+    padding: "0.875rem 1.25rem",
+    gap: "8px",
+    width: "32.25rem",
+    height: "10.25rem",
+    backgroundColor: "#0E1116",
+    border: `1px solid #303F73`,
+    borderRadius: "4px",
+    color: "$gray200",
+    resize: "none",
+    "&::placeholder": {
+      color: "#8D95AF",
+    },
+    "&:focus": {
+      borderColor: "#255D6A",
+      outline: 0,
+    },
+  },
+  span: {
+    position: "absolute",
+    bottom: "8px",
+    right: "8px",
+    fontFamily: "$default",
+    fontWeight: "$regular",
+    fontSize: "0.75rem",
+    lineHeight: "$base",
+    color: "$gray400",
+  },
+});
+
+export const ButtonsComment = styled("div", {
+  width: "100%",
+  display: "flex",
+  justifyContent: "flex-end",
+  alignItems: "flex-end",
+  gap: "0.5rem",
 });

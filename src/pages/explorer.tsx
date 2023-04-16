@@ -1,15 +1,21 @@
 import Input from "@/components/Input";
 import Menu from "@/components/Menu";
 import {
+  ButtonsComment,
   CardsContainer,
   ContainerComments,
+  CreateNewComment,
   DetailsBookModal,
   ExplorerContainer,
   ExplorerContent,
   HeaderContainer,
   HeaderHome,
+  HeaderOfCreateNewComment,
+  Option,
+  OptionsSignIn,
   Stars,
   TagsContainer,
+  TextArea,
   ToAssess,
 } from "@/styles/pages/explorer";
 import { Binoculars, BookOpen, BookmarkSimple, Star } from "phosphor-react";
@@ -19,13 +25,18 @@ import Tag from "@/components/Tag";
 import Card from "@/components/Card";
 import Close from "@/components/Close";
 import Image from "next/image";
-import Link from "next/link";
 import Comment from "@/components/Comment";
+import GoogleIcon from "../assets/googleIcon.png";
+import GithubIcon from "../assets/githubIcon.png";
+import Link from "@/components/Link";
 
 export default function Explorer() {
-  const [loggedInUser, setLoggedInUser] = useState<boolean>(false);
+  const [loggedInUser, setLoggedInUser] = useState<boolean>(true);
   const [handleModal, setHandleModal] = useState<boolean>(false);
+  const [handleModalLogin, setHandleModalLogin] = useState<boolean>(false);
   const [assessment, setAssessment] = useState<number>(3);
+  const [userNote, setUserNote] = useState<number>(0);
+  const [textarea, setTextarea] = useState<string>("");
 
   function handleStateModal() {
     if (handleModal === false) {
@@ -35,11 +46,39 @@ export default function Explorer() {
     }
   }
 
+  function handleStateModalLogin() {
+    if (handleModalLogin === false) {
+      setHandleModalLogin(true);
+    } else {
+      setHandleModalLogin(false);
+    }
+  }
+
   const handleOutsideClick = (e: any) => {
     if (e.target.id === "modal") {
       handleStateModal();
     }
   };
+
+  const handleOutsideClickLogin = (e: any) => {
+    if (e.target.id === "modalLogin") {
+      handleStateModalLogin();
+    }
+  };
+
+  function handleUserNote(note: number) {
+    setUserNote(note);
+  }
+
+  console.log(textarea);
+
+  function handleTextarea(string: string) {
+    if (textarea.length >= 450) {
+      setTextarea(string.slice(0, -1));
+    } else {
+      setTextarea(string);
+    }
+  }
 
   return (
     <ExplorerContainer>
@@ -83,6 +122,7 @@ export default function Explorer() {
                       fontSize: "1rem",
                       lineHeight: "160%",
                       color: "#D1D6E4",
+                      marginBottom: "6.875rem",
                     }}
                   >
                     Zeno Rocha
@@ -232,29 +272,313 @@ export default function Explorer() {
                 </div>
               </div>
             </DetailsBookModal>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                marginTop: "2.5rem",
-                marginBottom: "1rem",
-              }}
-            >
-              <p
+            {loggedInUser ? (
+              <div
                 style={{
-                  fontFamily: "Nunito Sans",
-                  fontWeight: 400,
-                  fontSize: "14px",
-                  lineHeight: "160%",
-                  color: "#E6E8F2",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "flex-start",
+                  marginTop: "2.5rem",
+                  marginBottom: "1rem",
                 }}
               >
-                Avaliações
-              </p>
-              <ToAssess>Avaliar</ToAssess>
-            </div>
+                <p
+                  style={{
+                    fontFamily: "Nunito Sans",
+                    fontWeight: 400,
+                    fontSize: "14px",
+                    lineHeight: "160%",
+                    color: "#E6E8F2",
+                  }}
+                >
+                  Avaliações
+                </p>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginTop: "2.5rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "Nunito Sans",
+                    fontWeight: 400,
+                    fontSize: "14px",
+                    lineHeight: "160%",
+                    color: "#E6E8F2",
+                  }}
+                >
+                  Avaliações
+                </p>
+                <ToAssess onClick={() => handleStateModalLogin()}>
+                  Avaliar
+                </ToAssess>
+              </div>
+            )}
             <ContainerComments>
+              <CreateNewComment>
+                <HeaderOfCreateNewComment>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: 43,
+                        height: 43,
+                        backgroundImage: `linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)`,
+                        borderRadius: "9999px",
+                      }}
+                    >
+                      <Image
+                        src={ImageTest}
+                        alt="imagem do usuário"
+                        width={40}
+                        height={40}
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </div>
+                    <span
+                      style={{
+                        fontFamily: "Nunito Sans",
+                        fontWeight: 400,
+                        fontSize: "1rem",
+                        lineHeight: "160%",
+                        color: "#F8F9FC",
+                      }}
+                    >
+                      Mateus Raimundo
+                    </span>
+                  </div>
+                  {userNote === 0 && (
+                    <Stars>
+                      <button
+                        onClick={() => handleUserNote(1)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(2)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(3)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(4)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(5)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                    </Stars>
+                  )}
+                  {userNote === 1 && (
+                    <Stars>
+                      <button
+                        onClick={() => handleUserNote(1)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(2)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(3)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(4)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(5)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                    </Stars>
+                  )}
+                  {userNote === 2 && (
+                    <Stars>
+                      <button
+                        onClick={() => handleUserNote(1)}
+                        style={{ all: "unset" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(2)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(3)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(4)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(5)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                    </Stars>
+                  )}
+                  {userNote === 3 && (
+                    <Stars>
+                      <button
+                        onClick={() => handleUserNote(1)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(2)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(3)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(4)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(5)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                    </Stars>
+                  )}
+                  {userNote === 4 && (
+                    <Stars>
+                      <button
+                        onClick={() => handleUserNote(1)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(2)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(3)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(4)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(5)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" />
+                      </button>
+                    </Stars>
+                  )}
+                  {userNote === 5 && (
+                    <Stars>
+                      <button
+                        onClick={() => handleUserNote(1)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(2)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(3)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(4)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                      <button
+                        onClick={() => handleUserNote(5)}
+                        style={{ all: "unset", cursor: "pointer" }}
+                      >
+                        <Star size={20} color="#8381D9" weight="fill" />
+                      </button>
+                    </Stars>
+                  )}
+                </HeaderOfCreateNewComment>
+                <TextArea>
+                  <textarea
+                    placeholder="Escreva sua avaliação"
+                    onChange={(e) => handleTextarea(e.target.value)}
+                    value={textarea}
+                  />
+                  <span>{textarea.length}/450</span>
+                </TextArea>
+                <ButtonsComment>
+                  <Close />
+                  <Close icon="checked" />
+                </ButtonsComment>
+              </CreateNewComment>
               <Comment
                 userImage={ImageTest}
                 userName="Mateus Raimundo"
@@ -304,6 +628,50 @@ export default function Explorer() {
                 description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, corrupti aliquid voluptate ipsum hic temporibus eligendi provident autem necessitatibus officia ad doloremque. Minus quaerat nostrum eaque impedit vitae, architecto optio Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, corrupti aliquid voluptate ipsum hic temporibus eligendi provident autem necessitatibus officia ad doloremque. Minus quaerat nostrum eaque impedit vitae, architecto optio Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, corrupti aliquid voluptate ipsum hic temporibus eligendi provident autem necessitatibus officia ad doloremque. Minus quaerat nostrum eaque impedit vitae, architecto optio"
               />
             </ContainerComments>
+          </div>
+        </div>
+      )}
+      {handleModalLogin && (
+        <div
+          id="modalLogin"
+          className={handleModalLogin ? "modalLogin" : "none"}
+          onClick={handleOutsideClickLogin}
+        >
+          <div className="modalContentLogin">
+            <button className="close" onClick={() => handleStateModalLogin()}>
+              <Close withBackground={false} />
+            </button>
+            <h3
+              style={{
+                fontFamily: "Nunito Sans",
+                fontWeight: 700,
+                fontSize: "1rem",
+                lineHeight: "140%",
+                color: "#E6E8F2",
+              }}
+            >
+              Faça login para deixar sua avaliação
+            </h3>
+            <OptionsSignIn>
+              <Option href="">
+                <Image
+                  src={GoogleIcon}
+                  alt="ícone do google"
+                  width={32}
+                  height={32}
+                />
+                <strong>Entrar com o Google</strong>
+              </Option>
+              <Option href="">
+                <Image
+                  src={GithubIcon}
+                  alt="ícone do github"
+                  width={32}
+                  height={32}
+                />
+                <strong>Entrar com o GitHub</strong>
+              </Option>
+            </OptionsSignIn>
           </div>
         </div>
       )}
