@@ -9,25 +9,27 @@ type Props = {
   loggedInUser?: boolean;
   avatarUser?: StaticImageData;
   nameUser?: string;
+  selectedMenu?: "home" | "explorer" | "profile";
 };
 
 export default function Menu({
   loggedInUser = false,
   nameUser = "insira o nome do usuário com a prop 'nameUser'",
   avatarUser = imageDefault,
+  selectedMenu = "home",
 }: Props) {
   return (
     <MenuContainer>
       <Image src={Logo} alt="logo" width={128} height={32} />
       <ContainerNavigation>
-        <Navigation title="Início" selected={true}>
+        <Navigation title="Início" selected={selectedMenu === "home"}>
           <ChartLineUp size={24} color="#F8F9FC" />
         </Navigation>
-        <Navigation title="Explorer">
+        <Navigation title="Explorer" selected={selectedMenu === "explorer"}>
           <Binoculars size={24} color="#F8F9FC" />
         </Navigation>
         {loggedInUser && (
-          <Navigation title="Perfil">
+          <Navigation title="Perfil" selected={selectedMenu === "profile"}>
             <User size={24} color="#F8F9FC" />
           </Navigation>
         )}
@@ -42,7 +44,7 @@ export default function Menu({
               width: "35px",
               height: "35px",
               backgroundImage: `linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)`,
-              borderRadius: "999999px"
+              borderRadius: "999999px",
             }}
           >
             <Image

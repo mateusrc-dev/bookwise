@@ -47,6 +47,7 @@ export const DetailsColumn = styled("div", {
   display: "flex",
   flexDirection: "column",
   justifyContent: "flex-start",
+  alignItems: "flex-start"
 });
 
 export const HeaderCard = styled("div", {
@@ -71,6 +72,9 @@ export const Stars = styled("div", {
 });
 
 export const DetailsBook = styled("main", {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
   h1: {
     fontFamily: "$default",
     fontWeight: "$bold",
@@ -97,10 +101,14 @@ export const DetailsBook = styled("main", {
     fontSize: "$sm",
     lineHeight: "$base",
     color: "$gray300",
+    textAlign: "left",
   },
 });
 
 export const DetailsBookWithUser = styled("main", {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
   h1: {
     fontFamily: "$default",
     fontWeight: "$bold",
@@ -127,6 +135,7 @@ export const DetailsBookWithUser = styled("main", {
     fontSize: "$sm",
     lineHeight: "$base",
     color: "$gray300",
+    textAlign: "left",
   },
 });
 

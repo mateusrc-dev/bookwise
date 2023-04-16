@@ -89,7 +89,7 @@ export default function Card({
                 style={{ borderRadius: "100%" }}
               />
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
               <span
                 style={{
                   fontFamily: "Nunito Sans",
