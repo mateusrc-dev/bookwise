@@ -3,6 +3,25 @@ import { styled } from "..";
 export const ExplorerContainer = styled("div", {
   display: "flex",
   width: "100%",
+  height: "100vh",
+  overflow: "auto",
+  "&::-webkit-scrollbar": {
+    width: 15,
+  },
+  "&::-webkit-scrollbar-thumb": {
+    background: "$green300",
+    borderRadius: 10,
+    width: 0,
+    backgroundClip: "padding-box",
+    border: "3px solid transparent",
+  },
+  "&::-webkit-scrollbar-thumb:hover": {
+    backgroundColor: "$green200",
+    width: 0,
+    borderRadius: 10,
+    backgroundClip: "padding-box",
+    border: "3px solid transparent",
+  },
   ".modal": {
     width: "100%",
     position: "absolute",
@@ -12,7 +31,7 @@ export const ExplorerContainer = styled("div", {
     minHeight: "100vh",
     background: "rgba(0, 0, 0, 0.5)",
     display: "flex",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
     ".modalContent": {
       position: "relative",
@@ -20,7 +39,8 @@ export const ExplorerContainer = styled("div", {
       flexDirection: "column",
       marginLeft: "auto",
       background: "$gray800",
-      minHeight: "100vh",
+      maxHeight: "100vh",
+      overflow: "auto",
       width: "41.25rem",
       padding: "4rem 3rem",
       boxShadow: "-4px 0px 30px rgba(0, 0, 0, 0.5)",
