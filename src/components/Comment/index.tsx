@@ -8,6 +8,7 @@ type Props = {
   userName: string;
   assessmentProp: number;
   description: string;
+  commentUser?: boolean;
 };
 
 export default function Comment({
@@ -15,11 +16,14 @@ export default function Comment({
   userName,
   assessmentProp,
   description,
+  commentUser = false,
 }: Props) {
   const [assessment, setAssessment] = useState<number>(assessmentProp);
 
   return (
-    <CommentContainer>
+    <CommentContainer
+      css={{ "--color-comment": commentUser ? "#252D4A" : "#181C2A" }}
+    >
       <HeaderComment>
         <div
           style={{

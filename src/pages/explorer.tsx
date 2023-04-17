@@ -37,6 +37,7 @@ export default function Explorer() {
   const [assessment, setAssessment] = useState<number>(3);
   const [userNote, setUserNote] = useState<number>(0);
   const [textarea, setTextarea] = useState<string>("");
+  const [commentUserExist, setCommentUserExist] = useState<boolean>(true);
 
   function handleStateModal() {
     if (handleModal === false) {
@@ -321,264 +322,274 @@ export default function Explorer() {
               </div>
             )}
             <ContainerComments>
-              <CreateNewComment>
-                <HeaderOfCreateNewComment>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "1rem",
-                    }}
-                  >
+              {commentUserExist ? (
+                <Comment
+                  userImage={ImageTest}
+                  userName="Mateus Raimundo"
+                  assessmentProp={2}
+                  description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, corrupti aliquid voluptate ipsum hic temporibus eligendi provident autem necessitatibus officia ad doloremque. Minus quaerat nostrum eaque impedit vitae, architecto optio Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, corrupti aliquid voluptate ipsum hic temporibus eligendi provident autem necessitatibus officia ad doloremque. Minus quaerat nostrum eaque impedit vitae, architecto optio Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, corrupti aliquid voluptate ipsum hic temporibus eligendi provident autem necessitatibus officia ad doloremque. Minus quaerat nostrum eaque impedit vitae, architecto optio"
+                  commentUser={true}
+                />
+              ) : (
+                <CreateNewComment>
+                  <HeaderOfCreateNewComment>
                     <div
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "center",
-                        width: 43,
-                        height: 43,
-                        backgroundImage: `linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)`,
-                        borderRadius: "9999px",
+                        gap: "1rem",
                       }}
                     >
-                      <Image
-                        src={ImageTest}
-                        alt="imagem do usuário"
-                        width={40}
-                        height={40}
-                        style={{ borderRadius: "100%" }}
-                      />
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: 43,
+                          height: 43,
+                          backgroundImage: `linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)`,
+                          borderRadius: "9999px",
+                        }}
+                      >
+                        <Image
+                          src={ImageTest}
+                          alt="imagem do usuário"
+                          width={40}
+                          height={40}
+                          style={{ borderRadius: "100%" }}
+                        />
+                      </div>
+                      <span
+                        style={{
+                          fontFamily: "Nunito Sans",
+                          fontWeight: 400,
+                          fontSize: "1rem",
+                          lineHeight: "160%",
+                          color: "#F8F9FC",
+                        }}
+                      >
+                        Mateus Raimundo
+                      </span>
                     </div>
-                    <span
-                      style={{
-                        fontFamily: "Nunito Sans",
-                        fontWeight: 400,
-                        fontSize: "1rem",
-                        lineHeight: "160%",
-                        color: "#F8F9FC",
-                      }}
-                    >
-                      Mateus Raimundo
-                    </span>
-                  </div>
-                  {userNote === 0 && (
-                    <Stars>
-                      <button
-                        onClick={() => handleUserNote(1)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(2)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(3)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(4)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(5)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                    </Stars>
-                  )}
-                  {userNote === 1 && (
-                    <Stars>
-                      <button
-                        onClick={() => handleUserNote(1)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(2)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(3)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(4)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(5)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                    </Stars>
-                  )}
-                  {userNote === 2 && (
-                    <Stars>
-                      <button
-                        onClick={() => handleUserNote(1)}
-                        style={{ all: "unset" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(2)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(3)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(4)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(5)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                    </Stars>
-                  )}
-                  {userNote === 3 && (
-                    <Stars>
-                      <button
-                        onClick={() => handleUserNote(1)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(2)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(3)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(4)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(5)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                    </Stars>
-                  )}
-                  {userNote === 4 && (
-                    <Stars>
-                      <button
-                        onClick={() => handleUserNote(1)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(2)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(3)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(4)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(5)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" />
-                      </button>
-                    </Stars>
-                  )}
-                  {userNote === 5 && (
-                    <Stars>
-                      <button
-                        onClick={() => handleUserNote(1)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(2)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(3)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(4)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                      <button
-                        onClick={() => handleUserNote(5)}
-                        style={{ all: "unset", cursor: "pointer" }}
-                      >
-                        <Star size={20} color="#8381D9" weight="fill" />
-                      </button>
-                    </Stars>
-                  )}
-                </HeaderOfCreateNewComment>
-                <TextArea>
-                  <textarea
-                    placeholder="Escreva sua avaliação"
-                    onChange={(e) => handleTextarea(e.target.value)}
-                    value={textarea}
-                  />
-                  <span>{textarea.length}/450</span>
-                </TextArea>
-                <ButtonsComment>
-                  <Close />
-                  <Close icon="checked" />
-                </ButtonsComment>
-              </CreateNewComment>
+                    {userNote === 0 && (
+                      <Stars>
+                        <button
+                          onClick={() => handleUserNote(1)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(2)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(3)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(4)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(5)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                      </Stars>
+                    )}
+                    {userNote === 1 && (
+                      <Stars>
+                        <button
+                          onClick={() => handleUserNote(1)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(2)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(3)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(4)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(5)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                      </Stars>
+                    )}
+                    {userNote === 2 && (
+                      <Stars>
+                        <button
+                          onClick={() => handleUserNote(1)}
+                          style={{ all: "unset" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(2)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(3)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(4)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(5)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                      </Stars>
+                    )}
+                    {userNote === 3 && (
+                      <Stars>
+                        <button
+                          onClick={() => handleUserNote(1)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(2)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(3)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(4)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(5)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                      </Stars>
+                    )}
+                    {userNote === 4 && (
+                      <Stars>
+                        <button
+                          onClick={() => handleUserNote(1)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(2)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(3)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(4)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(5)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" />
+                        </button>
+                      </Stars>
+                    )}
+                    {userNote === 5 && (
+                      <Stars>
+                        <button
+                          onClick={() => handleUserNote(1)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(2)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(3)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(4)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                        <button
+                          onClick={() => handleUserNote(5)}
+                          style={{ all: "unset", cursor: "pointer" }}
+                        >
+                          <Star size={20} color="#8381D9" weight="fill" />
+                        </button>
+                      </Stars>
+                    )}
+                  </HeaderOfCreateNewComment>
+                  <TextArea>
+                    <textarea
+                      placeholder="Escreva sua avaliação"
+                      onChange={(e) => handleTextarea(e.target.value)}
+                      value={textarea}
+                    />
+                    <span>{textarea.length}/450</span>
+                  </TextArea>
+                  <ButtonsComment>
+                    <Close />
+                    <Close icon="checked" />
+                  </ButtonsComment>
+                </CreateNewComment>
+              )}
               <Comment
                 userImage={ImageTest}
                 userName="Mateus Raimundo"

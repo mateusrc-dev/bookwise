@@ -8,7 +8,7 @@ export const CommentContainer = styled("div", {
   gap: "$5",
   width: "35.25rem",
   height: "11.125rem",
-  background: "$gray700",
+  background: "var(--color-comment)",
   borderRadius: "8px",
 });
 
