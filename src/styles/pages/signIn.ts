@@ -4,7 +4,6 @@ import { styled } from '..'
 export const ContainerSignIn = styled('div', {
   display: 'flex',
   flexDirection: 'row',
-
   minHeight: '100vh',
   padding: '$5',
 })
@@ -13,7 +12,6 @@ export const ColumnTwo = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '$10',
   justifyContent: 'center',
   width: '100%',
   h1: {
