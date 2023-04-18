@@ -4,15 +4,17 @@ import { X, Check } from 'phosphor-react'
 type CloseProps = {
   icon?: 'X' | 'checked'
   withBackground?: boolean
+  onSubmitComment?: () => void
 }
 
 export default function Close({
   icon = 'X',
   withBackground = true,
+  onSubmitComment = () => {},
 }: CloseProps) {
   if (withBackground) {
     return (
-      <CloseContainer>
+      <CloseContainer onClick={onSubmitComment}>
         {icon === 'X' ? (
           <X size={24} color="#8381D9" />
         ) : (

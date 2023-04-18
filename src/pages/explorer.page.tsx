@@ -36,7 +36,8 @@ export default function Explorer() {
   const [assessment /* setAssessment */] = useState<number>(3)
   const [userNote, setUserNote] = useState<number>(0)
   const [textarea, setTextarea] = useState<string>('')
-  const [commentUserExist /* setCommentUserExist */] = useState<boolean>(true)
+  const [commentUserExist /* setCommentUserExist */] = useState<boolean>(false)
+  const [messageError, setMessageError] = useState<string>('')
 
   function handleStateModal() {
     if (handleModal === false) {
@@ -77,6 +78,15 @@ export default function Explorer() {
       setTextarea(string.slice(0, -1))
     } else {
       setTextarea(string)
+    }
+  }
+
+  function handleSubmitComment() {
+    if (textarea.length === 0) {
+      setMessageError('Escreva seu comentário antes de salvá-lo')
+    } else {
+      setMessageError('')
+      console.log('ok')
     }
   }
 
@@ -583,9 +593,15 @@ export default function Explorer() {
                     />
                     <span>{textarea.length}/450</span>
                   </TextArea>
+                  {messageError.length !== 0 && (
+                    <p style={{ color: 'red' }}>{messageError}</p>
+                  )}
                   <ButtonsComment>
                     <Close />
-                    <Close icon="checked" />
+                    <Close
+                      icon="checked"
+                      onSubmitComment={handleSubmitComment}
+                    />
                   </ButtonsComment>
                 </CreateNewComment>
               )}
