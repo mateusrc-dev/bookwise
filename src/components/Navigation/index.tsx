@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
-import { Div, NavigationContainer } from "./styles";
+import { ReactNode } from 'react'
+import { Div, NavigationContainer } from './styles'
 
 type NavigationProps = {
-  title: string;
-  selected?: boolean;
-  children?: ReactNode;
-};
+  title: string
+  selected?: boolean
+  children?: ReactNode
+}
 
 export default function Navigation({
   title,
@@ -15,7 +15,7 @@ export default function Navigation({
   return (
     <NavigationContainer
       css={{
-        "--selected": selected === true ? "brightness(1)" : "brightness(0.7)",
+        '--selected': selected === true ? 'brightness(1)' : 'brightness(0.7)',
       }}
       href=""
     >
@@ -23,5 +23,5 @@ export default function Navigation({
       {children}
       <p>{title}</p>
     </NavigationContainer>
-  );
+  )
 }

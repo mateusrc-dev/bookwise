@@ -1,35 +1,35 @@
-import Image, { StaticImageData } from "next/image";
-import { ContainerNavigation, LinkLogout, MenuContainer } from "./styles";
-import Logo from "../../assets/Logo.png";
-import Navigation from "../Navigation";
-import { Binoculars, ChartLineUp, SignIn, User } from "phosphor-react";
-import imageDefault from "../../assets/rocketIcon.png";
+import Image, { StaticImageData } from 'next/image'
+import { ContainerNavigation, LinkLogout, MenuContainer } from './styles'
+import Logo from '../../assets/Logo.png'
+import Navigation from '../Navigation'
+import { Binoculars, ChartLineUp, SignIn, User } from 'phosphor-react'
+import imageDefault from '../../assets/rocketIcon.png'
 
 type Props = {
-  loggedInUser?: boolean;
-  avatarUser?: StaticImageData;
-  nameUser?: string;
-  selectedMenu?: "home" | "explorer" | "profile";
-};
+  loggedInUser?: boolean
+  avatarUser?: StaticImageData
+  nameUser?: string
+  selectedMenu?: 'home' | 'explorer' | 'profile'
+}
 
 export default function Menu({
   loggedInUser = false,
   nameUser = "insira o nome do usuário com a prop 'nameUser'",
   avatarUser = imageDefault,
-  selectedMenu = "home",
+  selectedMenu = 'home',
 }: Props) {
   return (
     <MenuContainer>
       <Image src={Logo} alt="logo" width={128} height={32} />
       <ContainerNavigation>
-        <Navigation title="Início" selected={selectedMenu === "home"}>
+        <Navigation title="Início" selected={selectedMenu === 'home'}>
           <ChartLineUp size={24} color="#F8F9FC" />
         </Navigation>
-        <Navigation title="Explorer" selected={selectedMenu === "explorer"}>
+        <Navigation title="Explorer" selected={selectedMenu === 'explorer'}>
           <Binoculars size={24} color="#F8F9FC" />
         </Navigation>
         {loggedInUser && (
-          <Navigation title="Perfil" selected={selectedMenu === "profile"}>
+          <Navigation title="Perfil" selected={selectedMenu === 'profile'}>
             <User size={24} color="#F8F9FC" />
           </Navigation>
         )}
@@ -38,13 +38,13 @@ export default function Menu({
         <LinkLogout href="">
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "35px",
-              height: "35px",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '35px',
+              height: '35px',
               backgroundImage: `linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)`,
-              borderRadius: "999999px",
+              borderRadius: '999999px',
             }}
           >
             <Image
@@ -52,7 +52,7 @@ export default function Menu({
               alt="foto do usuário"
               width={32}
               height={32}
-              style={{ borderRadius: "9999px" }}
+              style={{ borderRadius: '9999px' }}
             />
           </div>
           <p>{nameUser}</p>
@@ -65,5 +65,5 @@ export default function Menu({
         </LinkLogout>
       )}
     </MenuContainer>
-  );
+  )
 }

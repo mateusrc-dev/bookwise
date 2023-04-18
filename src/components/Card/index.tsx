@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { StaticImageData } from 'next/image'
 import {
   BodyWithUser,
   ContainerCard,
@@ -11,24 +11,24 @@ import {
   ImageColumn,
   ShowMoreText,
   Stars,
-} from "./styles";
-import { Star } from "phosphor-react";
-import ImageTest from "../../assets/entendendo-algoritmos.png";
-import { useState } from "react";
+} from './styles'
+import { Star } from 'phosphor-react'
+import ImageTest from '../../assets/entendendo-algoritmos.png'
+import { useState } from 'react'
 // import ShowMore from "react-show-more";
 
 type Props = {
-  src: StaticImageData;
-  assessment: number;
-  nameBook: string;
-  author: string;
-  description?: string;
-  type?: "big" | "small";
-  cardWithUser?: boolean;
-  userName?: string;
-  userImage?: StaticImageData;
-  onClickCard?: () => void,
-};
+  src: StaticImageData
+  assessment: number
+  nameBook: string
+  author: string
+  description?: string
+  type?: 'big' | 'small'
+  cardWithUser?: boolean
+  userName?: string
+  userImage?: StaticImageData
+  onClickCard?: () => void
+}
 
 export default function Card({
   src,
@@ -37,48 +37,48 @@ export default function Card({
   description = "Passe a propriedade 'description' para inserir uma descrição desse filme!",
   assessment,
   userName = "Passe a propriedade 'userName' para inserir o nome do usuário!",
-  type = "big",
+  type = 'big',
   cardWithUser = false,
   userImage = ImageTest,
-  onClickCard = () => {}
+  onClickCard = () => {},
 }: Props) {
-  const [showText, setShowText] = useState<boolean>(true);
+  const [showText, setShowText] = useState<boolean>(true)
 
   function handleShowMoreText() {
     if (showText === true) {
-      setShowText(false);
+      setShowText(false)
     } else {
-      setShowText(true);
+      setShowText(true)
     }
   }
 
-  if (type === "big") {
+  if (type === 'big') {
     return cardWithUser ? (
       <ContainerCardWithUser
         css={{
-          "--type-card-width": "37.5rem",
-          "--type-card-height": "17.5rem",
-          "--type-card-background": "#181C2A",
+          '--type-card-width': '37.5rem',
+          '--type-card-height': '17.5rem',
+          '--type-card-background': '#181C2A',
         }}
         onClick={onClickCard}
       >
         <HeaderWithUser>
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
             }}
           >
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 width: 43,
                 height: 43,
                 backgroundImage: `linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)`,
-                borderRadius: "9999px",
+                borderRadius: '9999px',
               }}
             >
               <Image
@@ -86,28 +86,34 @@ export default function Card({
                 alt="imagem do usuário"
                 width={40}
                 height={40}
-                style={{ borderRadius: "100%" }}
+                style={{ borderRadius: '100%' }}
               />
             </div>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+              }}
+            >
               <span
                 style={{
-                  fontFamily: "Nunito Sans",
+                  fontFamily: 'Nunito Sans',
                   fontWeight: 400,
-                  fontSize: "1rem",
-                  lineHeight: "160%",
-                  color: "#F8F9FC",
+                  fontSize: '1rem',
+                  lineHeight: '160%',
+                  color: '#F8F9FC',
                 }}
               >
                 {userName}
               </span>
               <span
                 style={{
-                  fontFamily: "Nunito Sans",
+                  fontFamily: 'Nunito Sans',
                   fontWeight: 400,
-                  fontSize: "14px",
-                  lineHeight: "160%",
-                  color: "#8D95AF",
+                  fontSize: '14px',
+                  lineHeight: '160%',
+                  color: '#8D95AF',
                 }}
               >
                 Hoje
@@ -165,27 +171,27 @@ export default function Card({
             src={src}
             alt="imagem do livro"
             css={{
-              "--type-image-width": type === "big" ? "6.75rem" : "4rem",
-              "--type-image-height": type === "big" ? "9.5rem" : "5.875rem",
+              '--type-image-width': type === 'big' ? '6.75rem' : '4rem',
+              '--type-image-height': type === 'big' ? '9.5rem' : '5.875rem',
             }}
           />
           <DetailsColumn>
             <DetailsBookWithUser
-              css={{ "--show-text": showText ? "-webkit-box" : "flex" }}
+              css={{ '--show-text': showText ? '-webkit-box' : 'flex' }}
             >
               <h1>{nameBook}</h1>
-              <p style={{ marginBottom: "20px" }} className="author">
+              <p style={{ marginBottom: '20px' }} className="author">
                 {author}
               </p>
               {description.length > 262 && showText ? (
                 <div
                   style={{
-                    display: "flex",
-                    flexDirection: "row",
+                    display: 'flex',
+                    flexDirection: 'row',
                   }}
                 >
                   <span className="description">
-                    {description.slice(0, -50)}...{" "}
+                    {description.slice(0, -50)}...{' '}
                     {showText && (
                       <ShowMoreText onClick={handleShowMoreText}>
                         ver mais
@@ -197,12 +203,12 @@ export default function Card({
                 <span
                   className="description"
                   style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    flexDirection: "column",
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    flexDirection: 'column',
                   }}
                 >
-                  {description}{" "}
+                  {description}{' '}
                   {!showText && (
                     <ShowMoreText onClick={handleShowMoreText}>
                       ver menos
@@ -217,9 +223,9 @@ export default function Card({
     ) : (
       <ContainerCard
         css={{
-          "--type-card-width": type === "big" ? "37.5rem" : "19.25rem",
-          "--type-card-height": type === "big" ? "12rem" : "8.125rem",
-          "--type-card-background": type === "big" ? "#252D4A" : "#181C2A",
+          '--type-card-width': type === 'big' ? '37.5rem' : '19.25rem',
+          '--type-card-height': type === 'big' ? '12rem' : '8.125rem',
+          '--type-card-background': type === 'big' ? '#252D4A' : '#181C2A',
         }}
         onClick={onClickCard}
       >
@@ -227,8 +233,8 @@ export default function Card({
           src={src}
           alt="imagem do livro"
           css={{
-            "--type-image-width": type === "big" ? "6.75rem" : "4rem",
-            "--type-image-height": type === "big" ? "9.5rem" : "5.875rem",
+            '--type-image-width': type === 'big' ? '6.75rem' : '4rem',
+            '--type-image-height': type === 'big' ? '9.5rem' : '5.875rem',
           }}
         />
         <DetailsColumn>
@@ -287,14 +293,14 @@ export default function Card({
           </DetailsBook>
         </DetailsColumn>
       </ContainerCard>
-    );
+    )
   } else {
     return (
       <ContainerCard
         css={{
-          "--type-card-width": type === "small" ? "19.25rem" : "37.5rem",
-          "--type-card-height": type === "small" ? "8.125rem" : "12rem",
-          "--type-card-background": type === "small" ? "#181C2A" : "#252D4A",
+          '--type-card-width': type === 'small' ? '19.25rem' : '37.5rem',
+          '--type-card-height': type === 'small' ? '8.125rem' : '12rem',
+          '--type-card-background': type === 'small' ? '#181C2A' : '#252D4A',
         }}
         onClick={onClickCard}
       >
@@ -302,8 +308,8 @@ export default function Card({
           src={src}
           alt="imagem do livro"
           css={{
-            "--type-image-width": type === "small" ? "4rem" : "6.75rem",
-            "--type-image-height": type === "small" ? "5.875rem" : "9.5rem",
+            '--type-image-width': type === 'small' ? '4rem' : '6.75rem',
+            '--type-image-height': type === 'small' ? '5.875rem' : '9.5rem',
           }}
         />
         <DetailsColumn>
@@ -359,6 +365,6 @@ export default function Card({
           )}
         </DetailsColumn>
       </ContainerCard>
-    );
+    )
   }
 }

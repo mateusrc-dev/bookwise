@@ -1,14 +1,14 @@
-import Image from "next/image";
-import ImageSignIn from "../assets/ImageSignIn.png";
-import GoogleIcon from "../assets/googleIcon.png";
-import GithubIcon from "../assets/githubIcon.png";
-import RocketIcon from "../assets/rocketIcon.png";
+import Image from 'next/image'
+import ImageSignIn from '../assets/ImageSignIn.png'
+import GoogleIcon from '../assets/googleIcon.png'
+import GithubIcon from '../assets/githubIcon.png'
+import RocketIcon from '../assets/rocketIcon.png'
 import {
   ColumnTwo,
   ContainerSignIn,
   Option,
   OptionsSignIn,
-} from "@/styles/pages/signIn";
+} from '@/styles/pages/signIn'
 
 export default function signIn() {
   return (
@@ -57,5 +57,5 @@ export default function signIn() {
         </OptionsSignIn>
       </ColumnTwo>
     </ContainerSignIn>
-  );
+  )
 }

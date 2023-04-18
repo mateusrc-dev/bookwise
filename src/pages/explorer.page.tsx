@@ -1,5 +1,5 @@
-import Input from "@/components/Input";
-import Menu from "@/components/Menu";
+import Input from '@/components/Input'
+import Menu from '@/components/Menu'
 import {
   ButtonsComment,
   CardsContainer,
@@ -17,67 +17,66 @@ import {
   TagsContainer,
   TextArea,
   ToAssess,
-} from "@/styles/pages/explorer";
-import { Binoculars, BookOpen, BookmarkSimple, Star } from "phosphor-react";
-import ImageTest from "../assets/codigo-limpo.png";
-import { useState } from "react";
-import Tag from "@/components/Tag";
-import Card from "@/components/Card";
-import Close from "@/components/Close";
-import Image from "next/image";
-import Comment from "@/components/Comment";
-import GoogleIcon from "../assets/googleIcon.png";
-import GithubIcon from "../assets/githubIcon.png";
-import Link from "@/components/Link";
+} from '@/styles/pages/explorer'
+import { Binoculars, BookOpen, BookmarkSimple, Star } from 'phosphor-react'
+import ImageTest from '../assets/codigo-limpo.png'
+import { useState } from 'react'
+import Tag from '@/components/Tag'
+import Card from '@/components/Card'
+import Close from '@/components/Close'
+import Image from 'next/image'
+import Comment from '@/components/Comment'
+import GoogleIcon from '../assets/googleIcon.png'
+import GithubIcon from '../assets/githubIcon.png'
 
 export default function Explorer() {
-  const [loggedInUser, setLoggedInUser] = useState<boolean>(true);
-  const [handleModal, setHandleModal] = useState<boolean>(false);
-  const [handleModalLogin, setHandleModalLogin] = useState<boolean>(false);
-  const [assessment, setAssessment] = useState<number>(3);
-  const [userNote, setUserNote] = useState<number>(0);
-  const [textarea, setTextarea] = useState<string>("");
-  const [commentUserExist, setCommentUserExist] = useState<boolean>(true);
+  const [loggedInUser /* setLoggedInUser */] = useState<boolean>(true)
+  const [handleModal, setHandleModal] = useState<boolean>(false)
+  const [handleModalLogin, setHandleModalLogin] = useState<boolean>(false)
+  const [assessment /* setAssessment */] = useState<number>(3)
+  const [userNote, setUserNote] = useState<number>(0)
+  const [textarea, setTextarea] = useState<string>('')
+  const [commentUserExist /* setCommentUserExist */] = useState<boolean>(true)
 
   function handleStateModal() {
     if (handleModal === false) {
-      setHandleModal(true);
+      setHandleModal(true)
     } else {
-      setHandleModal(false);
+      setHandleModal(false)
     }
   }
 
   function handleStateModalLogin() {
     if (handleModalLogin === false) {
-      setHandleModalLogin(true);
+      setHandleModalLogin(true)
     } else {
-      setHandleModalLogin(false);
+      setHandleModalLogin(false)
     }
   }
 
   const handleOutsideClick = (e: any) => {
-    if (e.target.id === "modal") {
-      handleStateModal();
+    if (e.target.id === 'modal') {
+      handleStateModal()
     }
-  };
-
-  const handleOutsideClickLogin = (e: any) => {
-    if (e.target.id === "modalLogin") {
-      handleStateModalLogin();
-    }
-  };
-
-  function handleUserNote(note: number) {
-    setUserNote(note);
   }
 
-  console.log(textarea);
+  const handleOutsideClickLogin = (e: any) => {
+    if (e.target.id === 'modalLogin') {
+      handleStateModalLogin()
+    }
+  }
+
+  function handleUserNote(note: number) {
+    setUserNote(note)
+  }
+
+  console.log(textarea)
 
   function handleTextarea(string: string) {
     if (textarea.length >= 450) {
-      setTextarea(string.slice(0, -1));
+      setTextarea(string.slice(0, -1))
     } else {
-      setTextarea(string);
+      setTextarea(string)
     }
   }
 
@@ -86,7 +85,7 @@ export default function Explorer() {
       {handleModal && (
         <div
           id="modal"
-          className={handleModal ? "modal" : "none"}
+          className={handleModal ? 'modal' : 'none'}
           onClick={handleOutsideClick}
         >
           <div className="modalContent">
@@ -95,35 +94,35 @@ export default function Explorer() {
             </button>
             <DetailsBookModal>
               <div
-                style={{ display: "flex", flexDirection: "row", gap: "2rem" }}
+                style={{ display: 'flex', flexDirection: 'row', gap: '2rem' }}
               >
                 <Image
                   src={ImageTest}
                   alt="imagem do livro"
                   width={171}
                   height={242}
-                  style={{ borderRadius: "10px" }}
+                  style={{ borderRadius: '10px' }}
                 />
                 <div>
                   <h3
                     style={{
-                      fontFamily: "Nunito Sans",
+                      fontFamily: 'Nunito Sans',
                       fontWeight: 700,
-                      fontSize: "18px",
-                      lineHeight: "140%",
-                      color: "#F8F9FC",
+                      fontSize: '18px',
+                      lineHeight: '140%',
+                      color: '#F8F9FC',
                     }}
                   >
                     14 Hábitos de Desenvolvedores Altamente Produtivos
                   </h3>
                   <p
                     style={{
-                      fontFamily: "Nunito Sans",
+                      fontFamily: 'Nunito Sans',
                       fontWeight: 400,
-                      fontSize: "1rem",
-                      lineHeight: "160%",
-                      color: "#D1D6E4",
-                      marginBottom: "6.875rem",
+                      fontSize: '1rem',
+                      lineHeight: '160%',
+                      color: '#D1D6E4',
+                      marginBottom: '6.875rem',
                     }}
                   >
                     Zeno Rocha
@@ -175,12 +174,12 @@ export default function Explorer() {
                   )}
                   <p
                     style={{
-                      fontFamily: "Nunito Sans",
+                      fontFamily: 'Nunito Sans',
                       fontWeight: 400,
-                      fontSize: "14px",
-                      lineHeight: "160%",
-                      color: "#8D95AF",
-                      marginTop: "4px",
+                      fontSize: '14px',
+                      lineHeight: '160%',
+                      color: '#8D95AF',
+                      marginTop: '4px',
                     }}
                   >
                     3 avaliações
@@ -189,46 +188,46 @@ export default function Explorer() {
               </div>
               <div
                 style={{
-                  marginTop: "2.5rem",
-                  padding: "1.5rem 0",
+                  marginTop: '2.5rem',
+                  padding: '1.5rem 0',
                   borderTop: `1px solid #252D4A`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                  width: "100%",
-                  gap: "3.5rem",
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  width: '100%',
+                  gap: '3.5rem',
                 }}
               >
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "1rem" }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
                 >
                   <BookmarkSimple size={24} color="#50B2C0" />
                   <div
                     style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                      gap: "4px",
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      gap: '4px',
                     }}
                   >
                     <p
                       style={{
-                        fontFamily: "Nunito Sans",
+                        fontFamily: 'Nunito Sans',
                         fontWeight: 400,
-                        fontSize: "14px",
-                        lineHeight: "160%",
-                        color: "#D1D6E4",
+                        fontSize: '14px',
+                        lineHeight: '160%',
+                        color: '#D1D6E4',
                       }}
                     >
                       Categoria
                     </p>
                     <p
                       style={{
-                        fontFamily: "Nunito Sans",
+                        fontFamily: 'Nunito Sans',
                         fontWeight: 700,
-                        fontSize: "1rem",
-                        lineHeight: "140%",
-                        color: "#E6E8F2",
+                        fontSize: '1rem',
+                        lineHeight: '140%',
+                        color: '#E6E8F2',
                       }}
                     >
                       Computação, educação
@@ -236,35 +235,35 @@ export default function Explorer() {
                   </div>
                 </div>
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "1rem" }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
                 >
                   <BookOpen size={24} color="#50B2C0" />
                   <div
                     style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                      gap: "4px",
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      gap: '4px',
                     }}
                   >
                     <p
                       style={{
-                        fontFamily: "Nunito Sans",
+                        fontFamily: 'Nunito Sans',
                         fontWeight: 400,
-                        fontSize: "14px",
-                        lineHeight: "160%",
-                        color: "#D1D6E4",
+                        fontSize: '14px',
+                        lineHeight: '160%',
+                        color: '#D1D6E4',
                       }}
                     >
                       Páginas
                     </p>
                     <p
                       style={{
-                        fontFamily: "Nunito Sans",
+                        fontFamily: 'Nunito Sans',
                         fontWeight: 700,
-                        fontSize: "1rem",
-                        lineHeight: "140%",
-                        color: "#E6E8F2",
+                        fontSize: '1rem',
+                        lineHeight: '140%',
+                        color: '#E6E8F2',
                       }}
                     >
                       160
@@ -276,20 +275,20 @@ export default function Explorer() {
             {loggedInUser ? (
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-start",
-                  marginTop: "2.5rem",
-                  marginBottom: "1rem",
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  justifyContent: 'flex-start',
+                  marginTop: '2.5rem',
+                  marginBottom: '1rem',
                 }}
               >
                 <p
                   style={{
-                    fontFamily: "Nunito Sans",
+                    fontFamily: 'Nunito Sans',
                     fontWeight: 400,
-                    fontSize: "14px",
-                    lineHeight: "160%",
-                    color: "#E6E8F2",
+                    fontSize: '14px',
+                    lineHeight: '160%',
+                    color: '#E6E8F2',
                   }}
                 >
                   Avaliações
@@ -298,20 +297,20 @@ export default function Explorer() {
             ) : (
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginTop: "2.5rem",
-                  marginBottom: "1rem",
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginTop: '2.5rem',
+                  marginBottom: '1rem',
                 }}
               >
                 <p
                   style={{
-                    fontFamily: "Nunito Sans",
+                    fontFamily: 'Nunito Sans',
                     fontWeight: 400,
-                    fontSize: "14px",
-                    lineHeight: "160%",
-                    color: "#E6E8F2",
+                    fontSize: '14px',
+                    lineHeight: '160%',
+                    color: '#E6E8F2',
                   }}
                 >
                   Avaliações
@@ -335,20 +334,20 @@ export default function Explorer() {
                   <HeaderOfCreateNewComment>
                     <div
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "1rem",
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1rem',
                       }}
                     >
                       <div
                         style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
                           width: 43,
                           height: 43,
                           backgroundImage: `linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)`,
-                          borderRadius: "9999px",
+                          borderRadius: '9999px',
                         }}
                       >
                         <Image
@@ -356,16 +355,16 @@ export default function Explorer() {
                           alt="imagem do usuário"
                           width={40}
                           height={40}
-                          style={{ borderRadius: "100%" }}
+                          style={{ borderRadius: '100%' }}
                         />
                       </div>
                       <span
                         style={{
-                          fontFamily: "Nunito Sans",
+                          fontFamily: 'Nunito Sans',
                           fontWeight: 400,
-                          fontSize: "1rem",
-                          lineHeight: "160%",
-                          color: "#F8F9FC",
+                          fontSize: '1rem',
+                          lineHeight: '160%',
+                          color: '#F8F9FC',
                         }}
                       >
                         Mateus Raimundo
@@ -375,31 +374,31 @@ export default function Explorer() {
                       <Stars>
                         <button
                           onClick={() => handleUserNote(1)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
                         <button
                           onClick={() => handleUserNote(2)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
                         <button
                           onClick={() => handleUserNote(3)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
                         <button
                           onClick={() => handleUserNote(4)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
                         <button
                           onClick={() => handleUserNote(5)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
@@ -409,31 +408,31 @@ export default function Explorer() {
                       <Stars>
                         <button
                           onClick={() => handleUserNote(1)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(2)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
                         <button
                           onClick={() => handleUserNote(3)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
                         <button
                           onClick={() => handleUserNote(4)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
                         <button
                           onClick={() => handleUserNote(5)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
@@ -443,31 +442,31 @@ export default function Explorer() {
                       <Stars>
                         <button
                           onClick={() => handleUserNote(1)}
-                          style={{ all: "unset" }}
+                          style={{ all: 'unset' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(2)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(3)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
                         <button
                           onClick={() => handleUserNote(4)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
                         <button
                           onClick={() => handleUserNote(5)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
@@ -477,31 +476,31 @@ export default function Explorer() {
                       <Stars>
                         <button
                           onClick={() => handleUserNote(1)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(2)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(3)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(4)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
                         <button
                           onClick={() => handleUserNote(5)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
@@ -511,31 +510,31 @@ export default function Explorer() {
                       <Stars>
                         <button
                           onClick={() => handleUserNote(1)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(2)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(3)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(4)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(5)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" />
                         </button>
@@ -545,31 +544,31 @@ export default function Explorer() {
                       <Stars>
                         <button
                           onClick={() => handleUserNote(1)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(2)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(3)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(4)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
                         <button
                           onClick={() => handleUserNote(5)}
-                          style={{ all: "unset", cursor: "pointer" }}
+                          style={{ all: 'unset', cursor: 'pointer' }}
                         >
                           <Star size={20} color="#8381D9" weight="fill" />
                         </button>
@@ -645,7 +644,7 @@ export default function Explorer() {
       {handleModalLogin && (
         <div
           id="modalLogin"
-          className={handleModalLogin ? "modalLogin" : "none"}
+          className={handleModalLogin ? 'modalLogin' : 'none'}
           onClick={handleOutsideClickLogin}
         >
           <div className="modalContentLogin">
@@ -654,11 +653,11 @@ export default function Explorer() {
             </button>
             <h3
               style={{
-                fontFamily: "Nunito Sans",
+                fontFamily: 'Nunito Sans',
                 fontWeight: 700,
-                fontSize: "1rem",
-                lineHeight: "140%",
-                color: "#E6E8F2",
+                fontSize: '1rem',
+                lineHeight: '140%',
+                color: '#E6E8F2',
               }}
             >
               Faça login para deixar sua avaliação
@@ -686,7 +685,7 @@ export default function Explorer() {
           </div>
         </div>
       )}
-      <div style={{ padding: "1.25rem 0 1.25rem 1.25rem" }}>
+      <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         {loggedInUser ? (
           <Menu
             avatarUser={ImageTest}
@@ -701,7 +700,7 @@ export default function Explorer() {
       <ExplorerContent>
         <HeaderContainer>
           <HeaderHome>
-            <Binoculars size={32} color={"#50B2C0"} />
+            <Binoculars size={32} color={'#50B2C0'} />
             <h1>Início</h1>
           </HeaderHome>
           <Input placeholder="Buscar livro ou autor" />
@@ -777,5 +776,5 @@ export default function Explorer() {
         </CardsContainer>
       </ExplorerContent>
     </ExplorerContainer>
-  );
+  )
 }

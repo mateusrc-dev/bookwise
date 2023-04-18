@@ -1,5 +1,5 @@
-import Menu from "@/components/Menu";
-import ImageTest from "../assets/codigo-limpo.png";
+import Menu from '@/components/Menu'
+import ImageTest from '../assets/codigo-limpo.png'
 import {
   BodyContainer,
   ContentContainer,
@@ -7,19 +7,19 @@ import {
   HeaderHome,
   HomeContainer,
   SecondColumn,
-} from "@/styles/pages/home";
-import { ChartLineUp } from "phosphor-react";
-import Link from "@/components/Link";
-import Card from "@/components/Card";
-import ImageText from "../assets/arquitetura-limpa.png";
-import { useState } from "react";
+} from '@/styles/pages/home'
+import { ChartLineUp } from 'phosphor-react'
+import Link from '@/components/Link'
+import Card from '@/components/Card'
+import ImageText from '../assets/arquitetura-limpa.png'
+import { useState } from 'react'
 
 export default function Home() {
-  const [loggedInUser, setLoggedInUser] = useState<boolean>(true);
+  const [loggedInUser, setLoggedInUser] = useState<boolean>(true)
 
   return (
     <HomeContainer>
-      <div style={{ padding: "1.25rem 0 1.25rem 1.25rem" }}>
+      <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         {loggedInUser ? (
           <Menu avatarUser={ImageTest} nameUser="Mateus" loggedInUser={true} />
         ) : (
@@ -29,27 +29,27 @@ export default function Home() {
       <BodyContainer>
         <ContentContainer>
           <FirstColumn>
-            <HeaderHome style={{ marginTop: "4.5rem", marginBottom: "2.5rem" }}>
-              <ChartLineUp size={32} color={"#50B2C0"} />
+            <HeaderHome style={{ marginTop: '4.5rem', marginBottom: '2.5rem' }}>
+              <ChartLineUp size={32} color={'#50B2C0'} />
               <h1>Início</h1>
             </HeaderHome>
             {loggedInUser && (
               <>
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginBottom: "1rem",
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '1rem',
                   }}
                 >
                   <h3
                     style={{
-                      fontFamily: "Nunito Sans",
+                      fontFamily: 'Nunito Sans',
                       fontWeight: 400,
-                      fontSize: "14px",
-                      lineHeight: "160%",
-                      color: "#F8F9FC",
+                      fontSize: '14px',
+                      lineHeight: '160%',
+                      color: '#F8F9FC',
                     }}
                   >
                     Sua última leitura
@@ -67,23 +67,23 @@ export default function Home() {
             )}
             <h3
               style={{
-                marginBottom: "1rem",
-                marginTop: loggedInUser ? "2.5rem" : "3.5rem",
-                fontFamily: "Nunito Sans",
+                marginBottom: '1rem',
+                marginTop: loggedInUser ? '2.5rem' : '3.5rem',
+                fontFamily: 'Nunito Sans',
                 fontWeight: 400,
-                fontSize: "14px",
-                lineHeight: "160%",
-                color: "#F8F9FC",
+                fontSize: '14px',
+                lineHeight: '160%',
+                color: '#F8F9FC',
               }}
             >
               Avaliações mais recentes
             </h3>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.75rem",
-                flexDirection: "column",
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                flexDirection: 'column',
               }}
             >
               <Card
@@ -161,29 +161,29 @@ export default function Home() {
           <SecondColumn>
             <HeaderHome
               style={{
-                visibility: "hidden",
-                marginTop: "4.5rem",
-                marginBottom: "2.5rem",
+                visibility: 'hidden',
+                marginTop: '4.5rem',
+                marginBottom: '2.5rem',
               }}
             >
-              <ChartLineUp size={32} color={"#50B2C0"} />
+              <ChartLineUp size={32} color={'#50B2C0'} />
               <h1>Início</h1>
             </HeaderHome>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                marginBottom: "1rem",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: '1rem',
               }}
             >
               <h3
                 style={{
-                  fontFamily: "Nunito Sans",
+                  fontFamily: 'Nunito Sans',
                   fontWeight: 400,
-                  fontSize: "14px",
-                  lineHeight: "160%",
-                  color: "#F8F9FC",
+                  fontSize: '14px',
+                  lineHeight: '160%',
+                  color: '#F8F9FC',
                 }}
               >
                 Livros populares
@@ -192,10 +192,10 @@ export default function Home() {
             </div>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.75rem",
-                flexDirection: "column",
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                flexDirection: 'column',
               }}
             >
               <Card
@@ -243,5 +243,5 @@ export default function Home() {
         </ContentContainer>
       </BodyContainer>
     </HomeContainer>
-  );
+  )
 }

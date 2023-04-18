@@ -1,15 +1,15 @@
-import Image, { StaticImageData } from "next/image";
-import { BodyComment, CommentContainer, HeaderComment, Stars } from "./styles";
-import { Star } from "phosphor-react";
-import { useState } from "react";
+import Image, { StaticImageData } from 'next/image'
+import { BodyComment, CommentContainer, HeaderComment, Stars } from './styles'
+import { Star } from 'phosphor-react'
+import { useState } from 'react'
 
 type Props = {
-  userImage: StaticImageData;
-  userName: string;
-  assessmentProp: number;
-  description: string;
-  commentUser?: boolean;
-};
+  userImage: StaticImageData
+  userName: string
+  assessmentProp: number
+  description: string
+  commentUser?: boolean
+}
 
 export default function Comment({
   userImage,
@@ -18,29 +18,29 @@ export default function Comment({
   description,
   commentUser = false,
 }: Props) {
-  const [assessment, setAssessment] = useState<number>(assessmentProp);
+  const [assessment, setAssessment] = useState<number>(assessmentProp)
 
   return (
     <CommentContainer
-      css={{ "--color-comment": commentUser ? "#252D4A" : "#181C2A" }}
+      css={{ '--color-comment': commentUser ? '#252D4A' : '#181C2A' }}
     >
       <HeaderComment>
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "1rem",
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
           }}
         >
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               width: 43,
               height: 43,
               backgroundImage: `linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)`,
-              borderRadius: "9999px",
+              borderRadius: '9999px',
             }}
           >
             <Image
@@ -48,34 +48,34 @@ export default function Comment({
               alt="imagem do usuário"
               width={40}
               height={40}
-              style={{ borderRadius: "100%" }}
+              style={{ borderRadius: '100%' }}
             />
           </div>
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
             }}
           >
             <span
               style={{
-                fontFamily: "Nunito Sans",
+                fontFamily: 'Nunito Sans',
                 fontWeight: 400,
-                fontSize: "1rem",
-                lineHeight: "160%",
-                color: "#F8F9FC",
+                fontSize: '1rem',
+                lineHeight: '160%',
+                color: '#F8F9FC',
               }}
             >
               {userName}
             </span>
             <span
               style={{
-                fontFamily: "Nunito Sans",
+                fontFamily: 'Nunito Sans',
                 fontWeight: 400,
-                fontSize: "14px",
-                lineHeight: "160%",
-                color: "#8D95AF",
+                fontSize: '14px',
+                lineHeight: '160%',
+                color: '#8D95AF',
               }}
             >
               Hoje
@@ -130,5 +130,5 @@ export default function Comment({
       </HeaderComment>
       <BodyComment>{description}</BodyComment>
     </CommentContainer>
-  );
+  )
 }

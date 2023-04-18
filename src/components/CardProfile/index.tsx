@@ -1,12 +1,12 @@
-import Image from "next/image";
-import { CardProfileContainer, HeaderCard } from "./styles";
-import { Stars } from "../Card/styles";
-import { Star } from "phosphor-react";
-import ImageTest from "../../assets/fragmentos-do-horror.png";
+import Image from 'next/image'
+import { CardProfileContainer, HeaderCard } from './styles'
+import { Stars } from '../Card/styles'
+import { Star } from 'phosphor-react'
+import ImageTest from '../../assets/fragmentos-do-horror.png'
 
 type Props = {
-  assessment: number;
-};
+  assessment: number
+}
 
 export default function CardProfile({ assessment }: Props) {
   return (
@@ -17,28 +17,28 @@ export default function CardProfile({ assessment }: Props) {
           alt="Imagem do livro"
           width={98}
           height={134}
-          style={{ borderRadius: "4px" }}
+          style={{ borderRadius: '4px' }}
         />
         <div>
           <h3
             style={{
-              fontFamily: "Nunito Sans",
+              fontFamily: 'Nunito Sans',
               fontWeight: 700,
-              fontSize: "18px",
-              lineHeight: "140%",
-              color: "#F8F9FC",
+              fontSize: '18px',
+              lineHeight: '140%',
+              color: '#F8F9FC',
             }}
           >
             Entendendo Algoritmos
           </h3>
           <p
             style={{
-              fontFamily: "Nunito Sans",
+              fontFamily: 'Nunito Sans',
               fontWeight: 400,
-              fontSize: "14px",
-              lineHeight: "160%",
-              color: "#8D95AF",
-              marginBottom: "3.8125rem",
+              fontSize: '14px',
+              lineHeight: '160%',
+              color: '#8D95AF',
+              marginBottom: '3.8125rem',
             }}
           >
             Aditya Bhargava
@@ -90,14 +90,14 @@ export default function CardProfile({ assessment }: Props) {
           )}
         </div>
       </HeaderCard>
-      <div style={{ marginTop: "1.5rem" }}>
+      <div style={{ marginTop: '1.5rem' }}>
         <span
           style={{
-            fontFamily: "Nunito Sans",
+            fontFamily: 'Nunito Sans',
             fontWeight: 400,
-            fontSize: "14px",
-            lineHeight: "160%",
-            color: "#D1D6E4",
+            fontSize: '14px',
+            lineHeight: '160%',
+            color: '#D1D6E4',
           }}
         >
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias
@@ -111,5 +111,5 @@ export default function CardProfile({ assessment }: Props) {
         </span>
       </div>
     </CardProfileContainer>
-  );
+  )
 }
