@@ -10,6 +10,7 @@ CREATE TABLE "users" (
 CREATE TABLE "books" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
     "author" TEXT NOT NULL,
     "summary" TEXT NOT NULL,
     "cover_url" TEXT NOT NULL,
@@ -72,10 +73,10 @@ CREATE TABLE "sessions" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "books_username_key" ON "books"("username");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "categories_name_key" ON "categories"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "accounts_provider_provider_account_id_key" ON "accounts"("provider", "provider_account_id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "sessions_session_token_key" ON "sessions"("session_token");
