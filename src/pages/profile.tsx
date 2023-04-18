@@ -106,6 +106,7 @@ export default function Profile() {
               height: "75px",
               backgroundImage: `linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)`,
               borderRadius: "999999px",
+              marginTop: "9.125rem",
             }}
           >
             <Image
@@ -116,35 +117,204 @@ export default function Profile() {
               style={{ borderRadius: "9999px" }}
             />
           </div>
-          <h3>Mateus Carvalho</h3>
-          <span>membro desde 2019</span>
-          <div>colocar aqui uma linha</div>
-          <div>
-            <BookOpen size={32} color={"#50B2C0"} />
-            <div>
-              <span>3853</span>
-              <span>Páginas lidas</span>
+          <h3
+            style={{
+              fontFamily: "Nunito Sans",
+              fontWeight: 700,
+              fontSize: "20px",
+              lineHeight: "140%",
+              color: "#F8F9FC",
+              marginTop: "1.25rem",
+            }}
+          >
+            Mateus Carvalho
+          </h3>
+          <span
+            style={{
+              fontFamily: "Nunito Sans",
+              fontWeight: 400,
+              fontSize: "14px",
+              lineHeight: "160%",
+              color: "#8D95AF",
+            }}
+          >
+            membro desde 2019
+          </span>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            <div
+              style={{
+                width: "32px",
+                height: "4px",
+                margin: "2rem auto",
+                background: `linear-gradient(90deg, #7FD1CC 0%, #9694F5 100%)`,
+                borderRadius: "999px",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1.25rem",
+                marginBottom: "2.5rem",
+              }}
+            >
+              <BookOpen size={32} color={"#50B2C0"} />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  flexDirection: "column",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "Nunito Sans",
+                    fontWeight: 700,
+                    fontSize: "1rem",
+                    lineHeight: "140%",
+                    color: "#E6E8F2",
+                  }}
+                >
+                  3853
+                </span>
+                <span
+                  style={{
+                    fontFamily: "Nunito Sans",
+                    fontWeight: 400,
+                    fontSize: "14px",
+                    lineHeight: "160%",
+                    color: "#D1D6E4",
+                  }}
+                >
+                  Páginas lidas
+                </span>
+              </div>
             </div>
-          </div>
-          <div>
-            <Books size={32} color={"#50B2C0"} />
-            <div>
-              <span>10</span>
-              <span>Livros avaliados</span>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1.25rem",
+                marginBottom: "2.5rem",
+              }}
+            >
+              <Books size={32} color={"#50B2C0"} />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  flexDirection: "column",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "Nunito Sans",
+                    fontWeight: 700,
+                    fontSize: "1rem",
+                    lineHeight: "140%",
+                    color: "#E6E8F2",
+                  }}
+                >
+                  10
+                </span>
+                <span
+                  style={{
+                    fontFamily: "Nunito Sans",
+                    fontWeight: 400,
+                    fontSize: "14px",
+                    lineHeight: "160%",
+                    color: "#D1D6E4",
+                  }}
+                >
+                  Livros avaliados
+                </span>
+              </div>
             </div>
-          </div>
-          <div>
-            <UserList size={32} color={"#50B2C0"} />
-            <div>
-              <span>8</span>
-              <span>Autores lidos</span>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1.25rem",
+                marginBottom: "2.5rem",
+              }}
+            >
+              <UserList size={32} color={"#50B2C0"} />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  flexDirection: "column",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "Nunito Sans",
+                    fontWeight: 700,
+                    fontSize: "1rem",
+                    lineHeight: "140%",
+                    color: "#E6E8F2",
+                  }}
+                >
+                  8
+                </span>
+                <span
+                  style={{
+                    fontFamily: "Nunito Sans",
+                    fontWeight: 400,
+                    fontSize: "14px",
+                    lineHeight: "160%",
+                    color: "#D1D6E4",
+                  }}
+                >
+                  Autores lidos
+                </span>
+              </div>
             </div>
-          </div>
-          <div>
-            <BookmarkSimple size={32} color={"#50B2C0"} />
-            <div>
-              <span>Computação</span>
-              <span>Categoria mais lida</span>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1.25rem",
+                marginBottom: "2.5rem",
+              }}
+            >
+              <BookmarkSimple size={32} color={"#50B2C0"} />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  flexDirection: "column",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "Nunito Sans",
+                    fontWeight: 700,
+                    fontSize: "1rem",
+                    lineHeight: "140%",
+                    color: "#E6E8F2",
+                  }}
+                >
+                  Computação
+                </span>
+                <span
+                  style={{
+                    fontFamily: "Nunito Sans",
+                    fontWeight: 400,
+                    fontSize: "14px",
+                    lineHeight: "160%",
+                    color: "#D1D6E4",
+                  }}
+                >
+                  Categoria mais lida
+                </span>
+              </div>
             </div>
           </div>
         </ThirdColumn>
