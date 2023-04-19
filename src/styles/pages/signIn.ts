@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { styled } from '..'
 
 export const ContainerSignIn = styled('div', {
@@ -37,7 +36,7 @@ export const OptionsSignIn = styled('div', {
   gap: '$4',
 })
 
-export const Option = styled(Link, {
+export const Option = styled('button', {
   backgroundColor: '$gray600',
   display: 'flex',
   flexDirection: 'row',

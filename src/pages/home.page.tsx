@@ -12,10 +12,20 @@ import { ChartLineUp } from 'phosphor-react'
 import Link from '@/components/Link'
 import Card from '@/components/Card'
 import ImageText from '../assets/arquitetura-limpa.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 export default function Home() {
-  const [loggedInUser, setLoggedInUser] = useState<boolean>(true)
+  const [loggedInUser, setLoggedInUser] = useState<boolean>(false)
+  const session = useSession()
+
+  const isSignedIn = session.status === 'authenticated'
+
+  useEffect(() => {
+    if (isSignedIn) {
+      setLoggedInUser(isSignedIn)
+    }
+  }, [isSignedIn])
 
   return (
     <HomeContainer>

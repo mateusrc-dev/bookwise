@@ -9,8 +9,26 @@ import {
   Option,
   OptionsSignIn,
 } from '@/styles/pages/signIn'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
-export default function signIn() {
+export default function SignIn() {
+  const session = useSession()
+  const router = useRouter()
+
+  const hasAuthError = !!router.query.error
+  const isSignedIn = session.status === 'authenticated'
+
+  async function handleSignIn() {
+    await signIn('google')
+  }
+
+  console.log(session.data)
+
+  if (isSignedIn) {
+    router.push('/home')
+  }
+
   return (
     <ContainerSignIn>
       <div>
@@ -36,7 +54,7 @@ export default function signIn() {
             <strong>Faça seu login ou acesse como visitante.</strong>
           </div>
           <OptionsSignIn>
-            <Option href="">
+            <Option onClick={handleSignIn}>
               <Image
                 src={GoogleIcon}
                 alt="ícone do google"
@@ -45,7 +63,8 @@ export default function signIn() {
               />
               <strong>Entrar com o Google</strong>
             </Option>
-            <Option href="">
+            {hasAuthError && <p>Falha ao se conectar com o Google!</p>}
+            <Option>
               <Image
                 src={GithubIcon}
                 alt="ícone do github"
@@ -54,7 +73,7 @@ export default function signIn() {
               />
               <strong>Entrar com o GitHub</strong>
             </Option>
-            <Option href="">
+            <Option>
               <Image
                 src={RocketIcon}
                 alt="ícone da rocket"
