@@ -1,6 +1,5 @@
 import { styled } from '@/styles'
 import Image from 'next/image'
-import Link from 'next/link'
 
 export const ContainerCard = styled('button', {
   display: 'flex',
@@ -37,8 +36,6 @@ export const ContainerCardWithUser = styled('button', {
 })
 
 export const ImageColumn = styled(Image, {
-  width: 'var(--type-image-width)',
-  height: 'var(--type-image-height)',
   borderRadius: '4px',
 })
 

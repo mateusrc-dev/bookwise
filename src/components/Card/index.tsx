@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import {
   BodyWithUser,
   ContainerCard,
@@ -13,12 +13,11 @@ import {
   Stars,
 } from './styles'
 import { Star } from 'phosphor-react'
-import ImageTest from '../../assets/entendendo-algoritmos.png'
 import { useState } from 'react'
 // import ShowMore from "react-show-more";
 
 type Props = {
-  src: StaticImageData
+  src: string | undefined
   assessment: number
   nameBook: string
   author: string
@@ -26,7 +25,7 @@ type Props = {
   type?: 'big' | 'small'
   cardWithUser?: boolean
   userName?: string
-  userImage?: StaticImageData
+  userImage?: string | undefined
   onClickCard?: () => void
 }
 
@@ -39,7 +38,7 @@ export default function Card({
   userName = "Passe a propriedade 'userName' para inserir o nome do usuário!",
   type = 'big',
   cardWithUser = false,
-  userImage = ImageTest,
+  userImage,
   onClickCard = () => {},
 }: Props) {
   const [showText, setShowText] = useState<boolean>(true)
@@ -81,13 +80,16 @@ export default function Card({
                 borderRadius: '9999px',
               }}
             >
-              <Image
-                src={userImage}
-                alt="imagem do usuário"
-                width={40}
-                height={40}
-                style={{ borderRadius: '100%' }}
-              />
+              {userImage !== undefined && (
+                <Image
+                  src={userImage}
+                  alt="imagem do usuário"
+                  width={40}
+                  height={40}
+                  quality={100}
+                  style={{ borderRadius: '100%' }}
+                />
+              )}
             </div>
             <div
               style={{
@@ -167,14 +169,15 @@ export default function Card({
           )}
         </HeaderWithUser>
         <BodyWithUser>
-          <ImageColumn
-            src={src}
-            alt="imagem do livro"
-            css={{
-              '--type-image-width': type === 'big' ? '6.75rem' : '4rem',
-              '--type-image-height': type === 'big' ? '9.5rem' : '5.875rem',
-            }}
-          />
+          {src !== undefined && (
+            <ImageColumn
+              src={src}
+              alt="imagem do livro"
+              width={type === 'big' ? 108 : 64}
+              height={type === 'big' ? 152 : 94}
+              quality={100}
+            />
+          )}
           <DetailsColumn>
             <DetailsBookWithUser
               css={{ '--show-text': showText ? '-webkit-box' : 'flex' }}
@@ -229,14 +232,15 @@ export default function Card({
         }}
         onClick={onClickCard}
       >
-        <ImageColumn
-          src={src}
-          alt="imagem do livro"
-          css={{
-            '--type-image-width': type === 'big' ? '6.75rem' : '4rem',
-            '--type-image-height': type === 'big' ? '9.5rem' : '5.875rem',
-          }}
-        />
+        {src !== undefined && (
+          <ImageColumn
+            src={src}
+            alt="imagem do livro"
+            width={type === 'big' ? 108 : 64}
+            height={type === 'big' ? 152 : 94}
+            quality={100}
+          />
+        )}
         <DetailsColumn>
           <HeaderCard>
             <span>Hoje</span>
@@ -304,14 +308,15 @@ export default function Card({
         }}
         onClick={onClickCard}
       >
-        <ImageColumn
-          src={src}
-          alt="imagem do livro"
-          css={{
-            '--type-image-width': type === 'small' ? '4rem' : '6.75rem',
-            '--type-image-height': type === 'small' ? '5.875rem' : '9.5rem',
-          }}
-        />
+        {src !== undefined && (
+          <ImageColumn
+            src={src}
+            alt="imagem do livro"
+            width={type === 'small' ? 64 : 108}
+            height={type === 'small' ? 94 : 152}
+            quality={100}
+          />
+        )}
         <DetailsColumn>
           <DetailsBook>
             <h1>{nameBook}</h1>

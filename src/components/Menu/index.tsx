@@ -1,22 +1,21 @@
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { ContainerNavigation, LinkLogout, MenuContainer } from './styles'
 import Logo from '../../assets/Logo.png'
 import Navigation from '../Navigation'
 import { Binoculars, ChartLineUp, SignIn, User } from 'phosphor-react'
-import imageDefault from '../../assets/rocketIcon.png'
 
 type Props = {
   loggedInUser?: boolean
-  avatarUser?: StaticImageData
-  nameUser?: string
+  avatarUser?: string | undefined | null
+  nameUser?: string | undefined | null
   selectedMenu?: 'home' | 'explorer' | 'profile'
 }
 
 export default function Menu({
   loggedInUser = false,
   nameUser = "insira o nome do usuário com a prop 'nameUser'",
-  avatarUser = imageDefault,
   selectedMenu = 'home',
+  avatarUser,
 }: Props) {
   return (
     <MenuContainer>
@@ -47,13 +46,15 @@ export default function Menu({
               borderRadius: '999999px',
             }}
           >
-            <Image
-              src={avatarUser}
-              alt="foto do usuário"
-              width={32}
-              height={32}
-              style={{ borderRadius: '9999px' }}
-            />
+            {avatarUser !== undefined && avatarUser !== null && (
+              <Image
+                src={`${avatarUser}`}
+                alt="foto do usuário"
+                width={32}
+                height={32}
+                style={{ borderRadius: '9999px' }}
+              />
+            )}
           </div>
           <p>{nameUser}</p>
           <SignIn size={20} color="#F75A68" />
