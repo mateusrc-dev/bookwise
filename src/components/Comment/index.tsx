@@ -1,24 +1,24 @@
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { BodyComment, CommentContainer, HeaderComment, Stars } from './styles'
 import { Star } from 'phosphor-react'
 import { useState } from 'react'
 
 type Props = {
-  userImage: StaticImageData
-  userName: string
-  assessmentProp: number
-  description: string
+  userImage: string | undefined
+  userName: string | undefined
+  assessmentProp: number | undefined
+  description: string | undefined
   commentUser?: boolean
 }
 
 export default function Comment({
-  userImage,
-  userName,
-  assessmentProp,
-  description,
+  userImage = '',
+  userName = '',
+  assessmentProp = 0,
+  description = '',
   commentUser = false,
 }: Props) {
-  const [assessment, setAssessment] = useState<number>(assessmentProp)
+  const [assessment] = useState<number>(assessmentProp)
 
   return (
     <CommentContainer

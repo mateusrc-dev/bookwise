@@ -26,7 +26,8 @@ type Props = {
   cardWithUser?: boolean
   userName?: string
   userImage?: string | undefined
-  onClickCard?: () => void
+  onClickCard?: (id: string) => void
+  idBook?: string | undefined
 }
 
 export default function Card({
@@ -40,6 +41,7 @@ export default function Card({
   cardWithUser = false,
   userImage,
   onClickCard = () => {},
+  idBook = '',
 }: Props) {
   const [showText, setShowText] = useState<boolean>(true)
 
@@ -59,7 +61,7 @@ export default function Card({
           '--type-card-height': '17.5rem',
           '--type-card-background': '#181C2A',
         }}
-        onClick={onClickCard}
+        onClick={() => onClickCard(idBook)}
       >
         <HeaderWithUser>
           <div
@@ -230,7 +232,7 @@ export default function Card({
           '--type-card-height': type === 'big' ? '12rem' : '8.125rem',
           '--type-card-background': type === 'big' ? '#252D4A' : '#181C2A',
         }}
-        onClick={onClickCard}
+        onClick={() => onClickCard(idBook)}
       >
         {src !== undefined && (
           <ImageColumn
@@ -303,10 +305,10 @@ export default function Card({
       <ContainerCard
         css={{
           '--type-card-width': type === 'small' ? '19.25rem' : '37.5rem',
-          '--type-card-height': type === 'small' ? '8.125rem' : '12rem',
+          '--type-card-height': type === 'small' ? '9.125rem' : '12rem',
           '--type-card-background': type === 'small' ? '#181C2A' : '#252D4A',
         }}
-        onClick={onClickCard}
+        onClick={() => onClickCard(idBook)}
       >
         {src !== undefined && (
           <ImageColumn

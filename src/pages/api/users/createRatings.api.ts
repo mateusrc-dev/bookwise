@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth'
 import { buildNextAuthOptions } from '../auth/[...nextauth].api'
 import { prisma } from '@/lib/prisma'
+import { v4 as uuidv4 } from 'uuid'
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,17 +20,26 @@ export default async function handler(
     return res.status(401).end()
   }
 
-  const { rate, description, userId, bookId } = req.body
+  type Props = {
+    rate: number
+    description: string
+    userId: string
+    bookId: string
+  }
 
-  prisma.rating.create({
+  const props: Props = req.body
+  console.log(props)
+
+  await prisma.rating.create({
     data: {
-      rate,
-      description,
+      id: uuidv4(),
+      rate: props.rate,
+      description: props.description,
       user: {
-        connect: { id: userId },
+        connect: { id: props.userId },
       },
       book: {
-        connect: { id: bookId },
+        connect: { id: props.bookId },
       },
     },
   })
