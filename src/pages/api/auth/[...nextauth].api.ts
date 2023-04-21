@@ -40,7 +40,7 @@ export function buildNextAuthOptions(
         ) {
           return '/home/?error=permissions'
         }
-        return true
+        return '/home'
       },
 
       async session({ session, user }) {

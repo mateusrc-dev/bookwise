@@ -108,8 +108,6 @@ export default function Explorer() {
   const [userId, setUserId] = useState<string>()
   const [CommentUser, setCommentUser] = useState<CommentUser>()
 
-  console.log(session.data)
-
   useEffect(() => {
     if (session.data?.user) {
       setUserId(session.data?.user?.id)
@@ -989,13 +987,12 @@ export default function Explorer() {
       <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         {loggedInUser ? (
           <Menu
-            avatarUser={'https://avatars.githubusercontent.com/u/109779094?v=4'}
-            nameUser="Mateus"
+            avatarUser={session.data?.user?.avatar_url}
+            nameUser={session.data?.user?.name}
             loggedInUser={true}
-            selectedMenu="explorer"
           />
         ) : (
-          <Menu selectedMenu="explorer" />
+          <Menu />
         )}
       </div>
       <ExplorerContent>
