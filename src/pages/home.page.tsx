@@ -13,6 +13,7 @@ import Card from '@/components/Card'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { api } from '@/lib/axios'
+import { useRouter } from 'next/router'
 
 type Ratings = {
   book: {
@@ -42,9 +43,10 @@ type Ratings = {
 export default function Home() {
   const [loggedInUser, setLoggedInUser] = useState<boolean>(false)
   const [ratings, setRatings] = useState<Ratings[]>([])
+  const [ratingUser, setRatingUser] = useState<Ratings>()
+  const [booksPopular, setBooksPopular] = useState<Ratings[]>([])
   const session: any = useSession()
-
-  console.log(ratings)
+  const router = useRouter()
 
   const isSignedIn = session.status === 'authenticated'
 
@@ -61,6 +63,27 @@ export default function Home() {
     }
     handleRatings()
   }, [])
+
+  useEffect(() => {
+    async function handleUserRating() {
+      const ratingUser = await api.get('/users/getFirstRatingUser')
+      setRatingUser(ratingUser.data.response)
+    }
+    handleUserRating()
+  }, [])
+
+  useEffect(() => {
+    async function handleBooksPopular() {
+      const ratingUser = await api.get('/users/getBooksPopular')
+      setBooksPopular(ratingUser.data.response)
+    }
+    handleBooksPopular()
+  }, [])
+
+  function handleNavigationExplorer() {
+    console.log('cheguei aqui!')
+    router.push('/explorer')
+  }
 
   return (
     <HomeContainer>
@@ -82,7 +105,7 @@ export default function Home() {
               <ChartLineUp size={32} color={'#50B2C0'} />
               <h1>Início</h1>
             </HeaderHome>
-            {loggedInUser && (
+            {loggedInUser && ratingUser && (
               <>
                 <div
                   style={{
@@ -180,7 +203,12 @@ export default function Home() {
               >
                 Livros populares
               </h3>
-              <Link direction="right" title="Ver todos" Color="blue" />
+              <Link
+                onNavigation={handleNavigationExplorer}
+                direction="right"
+                title="Ver todos"
+                Color="blue"
+              />
             </div>
             <div
               style={{
@@ -190,46 +218,17 @@ export default function Home() {
                 flexDirection: 'column',
               }}
             >
-              <Card
-                nameBook="Lindos"
-                assessment={4}
-                author="Mateus Raimundo"
-                description="melhor livro de todos"
-                src={'https://avatars.githubusercontent.com/u/109779094?v=4'}
-                type="small"
-              />
-              <Card
-                nameBook="Lindos"
-                assessment={4}
-                author="Mateus Raimundo"
-                description="melhor livro de todos"
-                src={'https://avatars.githubusercontent.com/u/109779094?v=4'}
-                type="small"
-              />
-              <Card
-                nameBook="Lindos"
-                assessment={4}
-                author="Mateus Raimundo"
-                description="melhor livro de todos"
-                src={'https://avatars.githubusercontent.com/u/109779094?v=4'}
-                type="small"
-              />
-              <Card
-                nameBook="Lindos"
-                assessment={4}
-                author="Mateus Raimundo"
-                description="melhor livro de todos"
-                src={'https://avatars.githubusercontent.com/u/109779094?v=4'}
-                type="small"
-              />
-              <Card
-                nameBook="Lindos"
-                assessment={4}
-                author="Mateus Raimundo"
-                description="melhor livro de todos"
-                src={'https://avatars.githubusercontent.com/u/109779094?v=4'}
-                type="small"
-              />
+              {booksPopular.map((book) => (
+                <Card
+                  key={String(book.id)}
+                  nameBook={book.book.name}
+                  assessment={book.rate}
+                  author={book.user.name}
+                  description={book.description}
+                  src={`/${book.book.cover_url}`.replace('/public', '')}
+                  type="small"
+                />
+              ))}
             </div>
           </SecondColumn>
         </ContentContainer>

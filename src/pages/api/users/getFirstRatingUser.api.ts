@@ -19,11 +19,9 @@ export default async function handler(
     return res.status(401).end()
   }
 
-  const response = await prisma.rating.findMany({
+  const response = await prisma.rating.findFirst({
     where: {
-      NOT: {
-        user_id: session?.user?.id,
-      },
+      user_id: session.user.id,
     },
     include: { user: true, book: true },
   })

@@ -1,19 +1,18 @@
-import { useState } from 'react'
 import { TagContainer } from './styles'
 
 type Props = {
   title: string
+  handleSelectTag?: (title: string) => void
+  selected: boolean
 }
 
-export default function Tag({ title }: Props) {
-  const [selected, setSelected] = useState(false)
-
+export default function Tag({
+  title,
+  handleSelectTag = () => {},
+  selected,
+}: Props) {
   function handleSelect() {
-    if (selected === false) {
-      setSelected(true)
-    } else {
-      setSelected(false)
-    }
+    handleSelectTag(title)
   }
 
   return (

@@ -78,6 +78,7 @@ export const DetailsBook = styled('main', {
     fontSize: '$md',
     lineHeight: '$short',
     color: '$gray100',
+    whiteSpace: 'nowrap',
   },
   '.author': {
     fontFamily: '$default',
@@ -112,6 +113,7 @@ export const DetailsBookWithUser = styled('main', {
     fontSize: '$md',
     lineHeight: '$short',
     color: '$gray100',
+    whiteSpace: 'nowrap',
   },
   '.author': {
     fontFamily: '$default',

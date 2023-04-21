@@ -23,8 +23,6 @@ export default function SignIn() {
     await signIn('google')
   }
 
-  console.log(session.data)
-
   if (isSignedIn) {
     router.push('/home')
   }

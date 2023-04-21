@@ -20,7 +20,7 @@ import {
 } from '@/styles/pages/explorer'
 import { Binoculars, BookOpen, BookmarkSimple, Star } from 'phosphor-react'
 import ImageTest from '../assets/codigo-limpo.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Tag from '@/components/Tag'
 import Card from '@/components/Card'
 import Close from '@/components/Close'
@@ -28,6 +28,21 @@ import Image from 'next/image'
 import Comment from '@/components/Comment'
 import GoogleIcon from '../assets/googleIcon.png'
 import GithubIcon from '../assets/githubIcon.png'
+import { api } from '@/lib/axios'
+
+type Book = {
+  author: string
+  cover_url: string
+  created_at: string
+  id: string
+  name: string
+  summary: string
+  total_pages: number
+  categories: {
+    book_id: string
+    categoryId: string
+  }[]
+}
 
 export default function Explorer() {
   const [loggedInUser /* setLoggedInUser */] = useState<boolean>(true)
@@ -38,6 +53,13 @@ export default function Explorer() {
   const [textarea, setTextarea] = useState<string>('')
   const [commentUserExist /* setCommentUserExist */] = useState<boolean>(false)
   const [messageError, setMessageError] = useState<string>('')
+  const [book, setBooks] = useState<Book[]>([])
+  const [find, setFind] = useState<string>('')
+  const [tags, setTags] = useState<string[]>([])
+  const [categoryId, setCategoryId] = useState<string[]>([])
+
+  console.log(book)
+  console.log(categoryId)
 
   function handleStateModal() {
     if (handleModal === false) {
@@ -71,8 +93,6 @@ export default function Explorer() {
     setUserNote(note)
   }
 
-  console.log(textarea)
-
   function handleTextarea(string: string) {
     if (textarea.length >= 450) {
       setTextarea(string.slice(0, -1))
@@ -89,6 +109,125 @@ export default function Explorer() {
       console.log('ok')
     }
   }
+
+  async function handleSearch(search: string) {
+    setFind(search)
+  }
+
+  function handleSelectTag(tag: string) {
+    if (tags.includes(tag)) {
+      const tagDelete = tags.filter((Tag) => Tag !== tag)
+      setTags(tagDelete)
+    } else if (tag === 'Tudo') {
+      setTags([])
+    } else {
+      setTags((prevState) => [...prevState, tag])
+    }
+
+    if (tag === 'Computação') {
+      if (categoryId.includes('c9f22067-4978-4a24-84a1-7d37f343dfc2')) {
+        const idDelete = categoryId.filter(
+          (id) => id !== 'c9f22067-4978-4a24-84a1-7d37f343dfc2',
+        )
+        setCategoryId(idDelete)
+      } else {
+        setCategoryId((prevState) => [
+          ...prevState,
+          'c9f22067-4978-4a24-84a1-7d37f343dfc2',
+        ])
+      }
+    }
+    if (tag === 'Educação') {
+      if (categoryId.includes('f1a50507-0aa7-4245-8a5c-0d0de14e9d6d')) {
+        const idDelete = categoryId.filter(
+          (id) => id !== 'f1a50507-0aa7-4245-8a5c-0d0de14e9d6d',
+        )
+        setCategoryId(idDelete)
+      } else {
+        setCategoryId((prevState) => [
+          ...prevState,
+          'f1a50507-0aa7-4245-8a5c-0d0de14e9d6d',
+        ])
+      }
+    }
+    if (tag === 'Fantasia') {
+      if (categoryId.includes('997f8a10-21fb-4c80-bd16-17e8b79a31a3')) {
+        const idDelete = categoryId.filter(
+          (id) => id !== '997f8a10-21fb-4c80-bd16-17e8b79a31a3',
+        )
+        setCategoryId(idDelete)
+      } else {
+        setCategoryId((prevState) => [
+          ...prevState,
+          '997f8a10-21fb-4c80-bd16-17e8b79a31a3',
+        ])
+      }
+    }
+    if (tag === 'Ficção científica') {
+      if (categoryId.includes('8c4a4a4d-cbc4-4d2c-bb46-e95b0a536e09')) {
+        const idDelete = categoryId.filter(
+          (id) => id !== '8c4a4a4d-cbc4-4d2c-bb46-e95b0a536e09',
+        )
+        setCategoryId(idDelete)
+      } else {
+        setCategoryId((prevState) => [
+          ...prevState,
+          '8c4a4a4d-cbc4-4d2c-bb46-e95b0a536e09',
+        ])
+      }
+    }
+    if (tag === 'Horror') {
+      if (categoryId.includes('a0a61b53-37d7-48ec-9b92-6db074f6d9c9')) {
+        const idDelete = categoryId.filter(
+          (id) => id !== 'a0a61b53-37d7-48ec-9b92-6db074f6d9c9',
+        )
+        setCategoryId(idDelete)
+      } else {
+        setCategoryId((prevState) => [
+          ...prevState,
+          'a0a61b53-37d7-48ec-9b92-6db074f6d9c9',
+        ])
+      }
+    }
+    if (tag === 'HQs') {
+      if (categoryId.includes('2e65c193-325a-40c3-98f3-6c13e9b75b02')) {
+        const idDelete = categoryId.filter(
+          (id) => id !== '2e65c193-325a-40c3-98f3-6c13e9b75b02',
+        )
+        setCategoryId(idDelete)
+      } else {
+        setCategoryId((prevState) => [
+          ...prevState,
+          '2e65c193-325a-40c3-98f3-6c13e9b75b02',
+        ])
+      }
+    }
+    if (tag === 'Suspense') {
+      if (categoryId.includes('7c8dc74a-2e03-4d72-96de-822e332e5530')) {
+        const idDelete = categoryId.filter(
+          (id) => id !== '7c8dc74a-2e03-4d72-96de-822e332e5530',
+        )
+        setCategoryId(idDelete)
+      } else {
+        setCategoryId((prevState) => [
+          ...prevState,
+          '7c8dc74a-2e03-4d72-96de-822e332e5530',
+        ])
+      }
+    }
+  }
+
+  useEffect(() => {
+    async function handleBooks() {
+      const books = await api.get('/users/getBooksByFilter', {
+        params: {
+          nameString: find,
+        },
+      })
+      setBooks(books.data.responseSearchByName)
+    }
+    handleBooks()
+  }, [find, tags])
 
   return (
     <ExplorerContainer>
@@ -704,7 +843,7 @@ export default function Explorer() {
       <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         {loggedInUser ? (
           <Menu
-            avatarUser={ImageTest}
+            avatarUser={'https://avatars.githubusercontent.com/u/109779094?v=4'}
             nameUser="Mateus"
             loggedInUser={true}
             selectedMenu="explorer"
@@ -719,77 +858,86 @@ export default function Explorer() {
             <Binoculars size={32} color={'#50B2C0'} />
             <h1>Início</h1>
           </HeaderHome>
-          <Input placeholder="Buscar livro ou autor" />
+          <Input onSearch={handleSearch} placeholder="Buscar livro ou autor" />
         </HeaderContainer>
         <TagsContainer>
-          <Tag title="Tudo" />
-          <Tag title="Computação" />
-          <Tag title="Educação" />
-          <Tag title="Fantasia" />
-          <Tag title="Ficção científica" />
-          <Tag title="Horror" />
-          <Tag title="HQs" />
-          <Tag title="Suspense" />
+          <Tag
+            title="Tudo"
+            handleSelectTag={handleSelectTag}
+            selected={tags.length === 0}
+          />
+          <Tag
+            title="Computação"
+            selected={tags.includes('Computação')}
+            handleSelectTag={handleSelectTag}
+          />
+          <Tag
+            title="Educação"
+            selected={tags.includes('Educação')}
+            handleSelectTag={handleSelectTag}
+          />
+          <Tag
+            title="Fantasia"
+            selected={tags.includes('Fantasia')}
+            handleSelectTag={handleSelectTag}
+          />
+          <Tag
+            title="Ficção científica"
+            selected={tags.includes('Ficção científica')}
+            handleSelectTag={handleSelectTag}
+          />
+          <Tag
+            title="Horror"
+            selected={tags.includes('Horror')}
+            handleSelectTag={handleSelectTag}
+          />
+          <Tag
+            title="HQs"
+            selected={tags.includes('HQs')}
+            handleSelectTag={handleSelectTag}
+          />
+          <Tag
+            title="Suspense"
+            selected={tags.includes('Suspense')}
+            handleSelectTag={handleSelectTag}
+          />
         </TagsContainer>
-        <CardsContainer>
-          <Card
-            type="small"
-            author="Mateus Raimundo"
-            nameBook="Lindo"
-            src={ImageTest}
-            assessment={3}
-            onClickCard={handleStateModal}
-          />
-          <Card
-            type="small"
-            author="Mateus Raimundo"
-            nameBook="Lindo"
-            src={ImageTest}
-            assessment={3}
-          />
-          <Card
-            type="small"
-            author="Mateus Raimundo"
-            nameBook="Lindo"
-            src={ImageTest}
-            assessment={3}
-          />
-          <Card
-            type="small"
-            author="Mateus Raimundo"
-            nameBook="Lindo"
-            src={ImageTest}
-            assessment={3}
-          />
-          <Card
-            type="small"
-            author="Mateus Raimundo"
-            nameBook="Lindo"
-            src={ImageTest}
-            assessment={3}
-          />
-          <Card
-            type="small"
-            author="Mateus Raimundo"
-            nameBook="Lindo"
-            src={ImageTest}
-            assessment={3}
-          />
-          <Card
-            type="small"
-            author="Mateus Raimundo"
-            nameBook="Lindo"
-            src={ImageTest}
-            assessment={3}
-          />
-          <Card
-            type="small"
-            author="Mateus Raimundo"
-            nameBook="Lindo"
-            src={ImageTest}
-            assessment={3}
-          />
-        </CardsContainer>
+        {categoryId.length === 0 ? (
+          <CardsContainer>
+            {book.map((item) => (
+              <Card
+                key={String(item.id)}
+                type="small"
+                author={item.author}
+                nameBook={item.name}
+                src={`/${item.cover_url}`.replace('/public', '')}
+                assessment={3}
+                onClickCard={handleStateModal}
+              />
+            ))}
+          </CardsContainer>
+        ) : (
+          <CardsContainer>
+            {book.map((item) =>
+              categoryId.map((id) =>
+                item.categories.map(
+                  (Id) =>
+                    Id.categoryId === id && (
+                      <Card
+                        key={String(item.id)}
+                        type="small"
+                        author={item.author}
+                        nameBook={item.name}
+                        src={`/${item.cover_url}`.replace('/public', '')}
+                        assessment={3}
+                        onClickCard={handleStateModal}
+                      />
+                    ),
+                ),
+              ),
+            )}
+          </CardsContainer>
+        )}
       </ExplorerContent>
     </ExplorerContainer>
   )

@@ -20,12 +20,16 @@ export default async function handler(
   }
 
   const response = await prisma.rating.findMany({
-    where: {
-      NOT: {
-        user_id: session?.user?.id,
+    orderBy: [
+      {
+        rate: 'desc',
       },
+    ],
+    include: {
+      book: true,
+      user: true,
     },
-    include: { user: true, book: true },
+    take: 4,
   })
 
   return res.json({ response })

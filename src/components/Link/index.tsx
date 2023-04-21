@@ -5,17 +5,20 @@ type LinkProps = {
   title: string
   direction?: 'right' | 'left'
   Color?: 'white' | 'blue'
+  onNavigation?: () => void
 }
 
 export default function Link({
   title,
   direction = 'left',
   Color = 'white',
+  onNavigation,
 }: LinkProps) {
   return (
     <LinkContainer
       style={direction === 'right' ? { gap: '8px' } : { gap: '12px' }}
       href=""
+      onClick={onNavigation}
     >
       {direction === 'left' && <CaretLeft size={20} color="#E6E8F2" />}
       <p
