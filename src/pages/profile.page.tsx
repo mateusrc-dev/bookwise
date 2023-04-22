@@ -26,6 +26,10 @@ type RatingsUser = {
     categories: {
       book_id: string
       categoryId: string
+      category: {
+        id: string
+        name: string
+      }
     }[]
     cover_url: string
     created_at: string
@@ -45,6 +49,77 @@ type RatingsUser = {
 export default function Profile() {
   const [user, setUser] = useState<UserProps>()
   const [ratingsUser, setRatingsUser] = useState<RatingsUser[]>([])
+  const [textInput, setTextInput] = useState<string>('')
+  const [authors, setAuthors] = useState<string[]>([])
+  const [numberPages, setNumberPages] = useState<number>(0)
+  const [categories, setCategories] = useState<string[]>([])
+  const [occurrences, setOccurrences] = useState<any>()
+  const [biggerOccurrence, setBiggerOccurrence] = useState<string | undefined>(
+    '',
+  )
+
+  function handleSearch(text: string) {
+    setTextInput(text)
+  }
+
+  useEffect(() => {
+    let bigger = -Infinity
+    let key
+    for (const prop in occurrences) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (occurrences.hasOwnProperty(prop)) {
+        if (occurrences[prop] > bigger) {
+          bigger = occurrences[prop]
+          key = prop
+        }
+      }
+    }
+    setBiggerOccurrence(key)
+  }, [occurrences])
+
+  useEffect(() => {
+    const occurrences = categories.reduce((acc: any, curr: any) => {
+      // eslint-disable-next-line no-sequences
+      return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc
+    }, {})
+    setOccurrences(occurrences)
+  }, [categories])
+
+  useEffect(() => {
+    const categoryName: string[] = []
+    for (let i = 0; ratingsUser.length > i; i++) {
+      for (let a = 0; ratingsUser[i].book.categories.length > a; a++) {
+        categoryName.push(ratingsUser[i].book.categories[a].category.name)
+      }
+    }
+    setCategories(categoryName)
+  }, [ratingsUser])
+
+  useEffect(() => {
+    let sum: number = 0
+    for (let i = 0; ratingsUser.length > i; i++) {
+      sum = sum + ratingsUser[i].book.total_pages
+    }
+    setNumberPages(sum)
+  }, [ratingsUser])
+
+  useEffect(() => {
+    let sum: number = 0
+    for (let i = 0; ratingsUser.length > i; i++) {
+      sum = sum + ratingsUser[i].book.total_pages
+    }
+    setNumberPages(sum)
+  }, [ratingsUser])
+
+  useEffect(() => {
+    const authors: string[] = []
+    for (let i = 0; ratingsUser.length > i; i++) {
+      if (!authors.includes(ratingsUser[i].book.author)) {
+        authors.push(ratingsUser[i].book.author)
+      }
+    }
+    setAuthors(authors)
+  }, [ratingsUser])
 
   useEffect(() => {
     async function handleFindUser() {
@@ -56,11 +131,13 @@ export default function Profile() {
 
   useEffect(() => {
     async function handleFindRatingsUser() {
-      const ratingsUser = await api.get('/users/getAllRatingsUser')
+      const ratingsUser = await api.get('/users/getAllRatingsUser', {
+        params: { nameString: textInput },
+      })
       setRatingsUser(ratingsUser.data.response)
     }
     handleFindRatingsUser()
-  }, [])
+  }, [textInput])
 
   return (
     <ProfileContainer>
@@ -96,7 +173,7 @@ export default function Profile() {
               Perfil
             </span>
           </div>
-          <Input placeholder="Buscar livro avaliado" />
+          <Input placeholder="Buscar livro avaliado" onSearch={handleSearch} />
           {ratingsUser.map((item) => (
             <>
               <p
@@ -209,7 +286,7 @@ export default function Profile() {
                     color: '#E6E8F2',
                   }}
                 >
-                  3853
+                  {numberPages}
                 </span>
                 <span
                   style={{
@@ -289,7 +366,7 @@ export default function Profile() {
                     color: '#E6E8F2',
                   }}
                 >
-                  8
+                  {authors.length}
                 </span>
                 <span
                   style={{
@@ -329,7 +406,7 @@ export default function Profile() {
                     color: '#E6E8F2',
                   }}
                 >
-                  Computação
+                  {biggerOccurrence}
                 </span>
                 <span
                   style={{

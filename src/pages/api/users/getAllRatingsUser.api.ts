@@ -19,11 +19,20 @@ export default async function handler(
     return res.status(401).end()
   }
 
+  const { nameString }: any = req.query
+
   const response = await prisma.rating.findMany({
+    include: {
+      book: { include: { categories: { include: { category: true } } } },
+    },
     where: {
       user_id: session.user.id,
+      book: {
+        name: {
+          contains: nameString,
+        },
+      },
     },
-    include: { book: { include: { categories: true } } },
   })
 
   return res.json({ response })
