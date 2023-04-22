@@ -7,19 +7,69 @@ import {
 } from '@/styles/pages/profile'
 import { BookOpen, BookmarkSimple, Books, User, UserList } from 'phosphor-react'
 import Input from '@/components/Input'
-import ImageTest from '../assets/historias-extraordinarias.png'
 import CardProfile from '@/components/CardProfile'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { api } from '@/lib/axios'
+
+type UserProps = {
+  avatar_url: string
+  created_at: string
+  email: string
+  id: string
+  name: string
+}
+
+type RatingsUser = {
+  book: {
+    author: string
+    categories: {
+      book_id: string
+      categoryId: string
+    }[]
+    cover_url: string
+    created_at: string
+    id: string
+    name: string
+    summary: string
+    total_pages: number
+  }
+  book_id: string
+  created_at: string
+  description: string
+  id: string
+  rate: number
+  user_id: string
+}
 
 export default function Profile() {
+  const [user, setUser] = useState<UserProps>()
+  const [ratingsUser, setRatingsUser] = useState<RatingsUser[]>([])
+
+  useEffect(() => {
+    async function handleFindUser() {
+      const userDetails = await api.get('/users/getUser')
+      setUser(userDetails.data.response)
+    }
+    handleFindUser()
+  }, [])
+
+  useEffect(() => {
+    async function handleFindRatingsUser() {
+      const ratingsUser = await api.get('/users/getAllRatingsUser')
+      setRatingsUser(ratingsUser.data.response)
+    }
+    handleFindRatingsUser()
+  }, [])
+
   return (
     <ProfileContainer>
       <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         <Menu
           loggedInUser={true}
           selectedMenu="profile"
-          nameUser="Mateus"
-          avatarUser={ImageTest}
+          nameUser={user?.name}
+          avatarUser={user?.avatar_url}
         />
       </div>
       <ContentProfile>
@@ -47,48 +97,30 @@ export default function Profile() {
             </span>
           </div>
           <Input placeholder="Buscar livro avaliado" />
-          <p
-            style={{
-              marginTop: '2rem',
-              marginBottom: '0.5rem',
-              fontFamily: 'Nunito Sans',
-              fontWeight: 400,
-              fontSize: '14px',
-              lineHeight: '160%',
-              color: '#D1D6E4',
-            }}
-          >
-            Há 2 dias
-          </p>
-          <CardProfile assessment={3} />
-          <p
-            style={{
-              marginTop: '2rem',
-              marginBottom: '0.5rem',
-              fontFamily: 'Nunito Sans',
-              fontWeight: 400,
-              fontSize: '14px',
-              lineHeight: '160%',
-              color: '#D1D6E4',
-            }}
-          >
-            Há 2 dias
-          </p>
-          <CardProfile assessment={3} />
-          <p
-            style={{
-              marginTop: '2rem',
-              marginBottom: '0.5rem',
-              fontFamily: 'Nunito Sans',
-              fontWeight: 400,
-              fontSize: '14px',
-              lineHeight: '160%',
-              color: '#D1D6E4',
-            }}
-          >
-            Há 2 dias
-          </p>
-          <CardProfile assessment={3} />
+          {ratingsUser.map((item) => (
+            <>
+              <p
+                style={{
+                  marginTop: '2rem',
+                  marginBottom: '0.5rem',
+                  fontFamily: 'Nunito Sans',
+                  fontWeight: 400,
+                  fontSize: '14px',
+                  lineHeight: '160%',
+                  color: '#D1D6E4',
+                }}
+              >
+                Há 2 dias
+              </p>
+              <CardProfile
+                assessment={item.rate}
+                author={item.book.author}
+                description={item.description}
+                image={`/${item.book.cover_url}`.replace('/public', '')}
+                name={item.book.name}
+              />
+            </>
+          ))}
         </SecondColumn>
         <ThirdColumn>
           <div
@@ -103,13 +135,15 @@ export default function Profile() {
               marginTop: '9.125rem',
             }}
           >
-            <Image
-              src={ImageTest}
-              alt="foto do usuário"
-              width={72}
-              height={72}
-              style={{ borderRadius: '9999px' }}
-            />
+            {user?.avatar_url && (
+              <Image
+                src={user?.avatar_url}
+                alt="foto do usuário"
+                width={72}
+                height={72}
+                style={{ borderRadius: '9999px' }}
+              />
+            )}
           </div>
           <h3
             style={{
@@ -121,7 +155,7 @@ export default function Profile() {
               marginTop: '1.25rem',
             }}
           >
-            Mateus Carvalho
+            {user?.name}
           </h3>
           <span
             style={{
@@ -215,7 +249,7 @@ export default function Profile() {
                     color: '#E6E8F2',
                   }}
                 >
-                  10
+                  {ratingsUser.length}
                 </span>
                 <span
                   style={{

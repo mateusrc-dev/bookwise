@@ -2,18 +2,27 @@ import Image from 'next/image'
 import { CardProfileContainer, HeaderCard } from './styles'
 import { Stars } from '../Card/styles'
 import { Star } from 'phosphor-react'
-import ImageTest from '../../assets/fragmentos-do-horror.png'
 
 type Props = {
   assessment: number
+  image?: string | undefined
+  name?: string
+  author?: string
+  description?: string
 }
 
-export default function CardProfile({ assessment }: Props) {
+export default function CardProfile({
+  assessment,
+  image = '',
+  name = '',
+  author = '',
+  description = '',
+}: Props) {
   return (
     <CardProfileContainer>
       <HeaderCard>
         <Image
-          src={ImageTest}
+          src={image}
           alt="Imagem do livro"
           width={98}
           height={134}
@@ -29,7 +38,7 @@ export default function CardProfile({ assessment }: Props) {
               color: '#F8F9FC',
             }}
           >
-            Entendendo Algoritmos
+            {name}
           </h3>
           <p
             style={{
@@ -41,7 +50,7 @@ export default function CardProfile({ assessment }: Props) {
               marginBottom: '3.8125rem',
             }}
           >
-            Aditya Bhargava
+            {author}
           </p>
           {assessment === 1 && (
             <Stars>
@@ -100,14 +109,7 @@ export default function CardProfile({ assessment }: Props) {
             color: '#D1D6E4',
           }}
         >
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias
-          perspiciatis similique itaque neque ratione consectetur nesciunt
-          tenetur aperiam rem! Fugiat mollitia autem recusandae sint quos rem
-          pariatur architecto dolorum eos. Lorem ipsum dolor sit amet
-          consectetur, adipisicing elit. Inventore aperiam veniam ut ad
-          deleniti, a ducimus, laborum alias harum, quia reprehenderit aut
-          exercitationem ratione voluptas accusamus accusantium adipisci
-          deserunt nam.
+          {description}
         </span>
       </div>
     </CardProfileContainer>

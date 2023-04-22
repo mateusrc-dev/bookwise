@@ -7,7 +7,6 @@ export const CardProfileContainer = styled('div', {
   padding: '1.5rem',
   gap: '0.875rem',
   width: '39rem',
-  height: '22.5rem',
   background: '$gray700',
   borderRadius: '8px',
   marginBottom: '1.5rem',

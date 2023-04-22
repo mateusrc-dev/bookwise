@@ -17,19 +17,13 @@ export default async function handler(
   )
   if (!session) {
     return res.status(401).end()
-  } // ATENÇÃO ----> tem requisições que não precisam de autenticação para funcionarem, portanto, podemos tirar esse if para seguir o fluxo
+  }
 
   const response = await prisma.rating.findMany({
-    orderBy: [
-      {
-        rate: 'desc',
-      },
-    ],
-    include: {
-      book: true,
-      user: true,
+    where: {
+      user_id: session.user.id,
     },
-    take: 4,
+    include: { book: { include: { categories: true } } },
   })
 
   return res.json({ response })

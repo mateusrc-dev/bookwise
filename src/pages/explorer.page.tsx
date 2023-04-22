@@ -992,9 +992,10 @@ export default function Explorer() {
             avatarUser={session.data?.user?.avatar_url}
             nameUser={session.data?.user?.name}
             loggedInUser={true}
+            selectedMenu="explorer"
           />
         ) : (
-          <Menu />
+          <Menu selectedMenu="explorer" />
         )}
       </div>
       <ExplorerContent>
