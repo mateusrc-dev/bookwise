@@ -45,10 +45,13 @@ export default function Home() {
   const [ratings, setRatings] = useState<Ratings[]>([])
   const [ratingUser, setRatingUser] = useState<Ratings>()
   const [booksPopular, setBooksPopular] = useState<Ratings[]>([])
+  const [loading, setLoading] = useState(false)
   const session: any = useSession()
   const router = useRouter()
 
   const isSignedIn = session.status === 'authenticated'
+
+  console.log(session)
 
   useEffect(() => {
     if (isSignedIn) {
@@ -57,35 +60,48 @@ export default function Home() {
   }, [isSignedIn])
 
   useEffect(() => {
+    setLoading(true)
     async function handleRatings() {
-      const ratingsAll = await api.get('/users/getAllRatings')
-      setRatings(ratingsAll.data.response)
+      if (isSignedIn) {
+        const ratingsAll = await api.get('/users/getAllRatings')
+        setRatings(ratingsAll.data.response)
+      }
     }
+    setLoading(false)
     handleRatings()
-  }, [])
+  }, [isSignedIn])
 
   useEffect(() => {
+    setLoading(true)
     async function handleUserRating() {
-      const ratingUser = await api.get('/users/getFirstRatingUser')
-      setRatingUser(ratingUser.data.response)
+      if (isSignedIn) {
+        const ratingUser = await api.get('/users/getFirstRatingUser')
+        setRatingUser(ratingUser.data.response)
+      }
     }
+    setLoading(false)
     handleUserRating()
-  }, [])
+  }, [isSignedIn])
 
   useEffect(() => {
+    setLoading(true)
     async function handleBooksPopular() {
-      const ratingUser = await api.get('/users/getBooksPopular')
-      setBooksPopular(ratingUser.data.response)
+      if (isSignedIn) {
+        const ratingUser = await api.get('/users/getBooksPopular')
+        setBooksPopular(ratingUser.data.response)
+      }
     }
+    setLoading(false)
     handleBooksPopular()
-  }, [])
+  }, [isSignedIn])
 
   function handleNavigationExplorer() {
-    console.log('cheguei aqui!')
     router.push('/explorer')
   }
 
-  return (
+  return loading ? (
+    <>Carregando...</>
+  ) : (
     <HomeContainer>
       <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         {loggedInUser ? (
@@ -129,11 +145,11 @@ export default function Home() {
                   <Link direction="right" title="Ver todos" Color="blue" />
                 </div>
                 <Card
-                  nameBook="Lindos"
-                  assessment={4}
-                  author="Mateus Raimundo"
-                  description="melhor livro de todos"
-                  src={'https://avatars.githubusercontent.com/u/109779094?v=4'}
+                  nameBook={ratingUser.book.name}
+                  assessment={ratingUser.rate}
+                  author={ratingUser.book.author}
+                  description={ratingUser.description}
+                  src={`/${ratingUser.book.cover_url}`.replace('/public', '')}
                 />
               </>
             )}

@@ -3,9 +3,8 @@ import { ContainerNavigation, LinkLogout, MenuContainer } from './styles'
 import Logo from '../../assets/Logo.png'
 import Navigation from '../Navigation'
 import { Binoculars, ChartLineUp, SignIn, User } from 'phosphor-react'
-import { api } from '@/lib/axios'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
+import { signOut } from 'next-auth/react'
 
 type Props = {
   loggedInUser?: boolean
@@ -20,21 +19,10 @@ export default function Menu({
   selectedMenu = 'home',
   avatarUser,
 }: Props) {
-  const [sessionToken, setSessionToken] = useState()
-  const router = useRouter()
-  useEffect(() => {
-    async function handleSession() {
-      const session = await api.get('/users/getSession')
-      setSessionToken(session.data.response.session_token)
-    }
-    handleSession()
-  }, [])
+  // const router = useRouter()
 
   async function deleteSession() {
-    await api.delete('/users/deleteSession', {
-      params: { sessionToken },
-    })
-    router.push('/login')
+    signOut({ callbackUrl: 'http://localhost:3000' })
   }
 
   return (

@@ -108,6 +108,8 @@ export default function Explorer() {
   const [userId, setUserId] = useState<string>()
   const [CommentUser, setCommentUser] = useState<CommentUser>()
 
+  console.log(session)
+
   useEffect(() => {
     if (session.data?.user) {
       setUserId(session.data?.user?.id)
