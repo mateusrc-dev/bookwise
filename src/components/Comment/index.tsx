@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { BodyComment, CommentContainer, HeaderComment, Stars } from './styles'
 import { Star } from 'phosphor-react'
-import { useState } from 'react'
 
 type Props = {
   userImage: string | undefined
@@ -18,8 +17,6 @@ export default function Comment({
   description = '',
   commentUser = false,
 }: Props) {
-  const [assessment] = useState<number>(assessmentProp)
-
   return (
     <CommentContainer
       css={{ '--color-comment': commentUser ? '#252D4A' : '#181C2A' }}
@@ -82,7 +79,7 @@ export default function Comment({
             </span>
           </div>
         </div>
-        {assessment === 1 && (
+        {assessmentProp === 1 && (
           <Stars>
             <Star size={20} color="#8381D9" weight="fill" />
             <Star size={20} color="#8381D9" />
@@ -91,7 +88,7 @@ export default function Comment({
             <Star size={20} color="#8381D9" />
           </Stars>
         )}
-        {assessment === 2 && (
+        {assessmentProp === 2 && (
           <Stars>
             <Star weight="fill" size={20} color="#8381D9" />
             <Star weight="fill" size={20} color="#8381D9" />
@@ -100,7 +97,7 @@ export default function Comment({
             <Star size={20} color="#8381D9" />
           </Stars>
         )}
-        {assessment === 3 && (
+        {assessmentProp === 3 && (
           <Stars>
             <Star weight="fill" size={20} color="#8381D9" />
             <Star weight="fill" size={20} color="#8381D9" />
@@ -109,7 +106,7 @@ export default function Comment({
             <Star size={20} color="#8381D9" />
           </Stars>
         )}
-        {assessment === 4 && (
+        {assessmentProp === 4 && (
           <Stars>
             <Star weight="fill" size={20} color="#8381D9" />
             <Star weight="fill" size={20} color="#8381D9" />
@@ -118,7 +115,7 @@ export default function Comment({
             <Star size={20} color="#8381D9" />
           </Stars>
         )}
-        {assessment === 5 && (
+        {assessmentProp === 5 && (
           <Stars>
             <Star weight="fill" size={20} color="#8381D9" />
             <Star weight="fill" size={20} color="#8381D9" />

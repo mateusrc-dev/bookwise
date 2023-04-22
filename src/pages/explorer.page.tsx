@@ -29,6 +29,7 @@ import GoogleIcon from '../assets/googleIcon.png'
 import GithubIcon from '../assets/githubIcon.png'
 import { api } from '@/lib/axios'
 import { useSession } from 'next-auth/react'
+import StarsComponent from '@/components/Stars'
 
 type Book = {
   author: string
@@ -92,7 +93,6 @@ type CommentUser = {
 export default function Explorer() {
   const [handleModal, setHandleModal] = useState<boolean>(false)
   const [handleModalLogin, setHandleModalLogin] = useState<boolean>(false)
-  const [assessment /* setAssessment */] = useState<number>(3)
   const [userNote, setUserNote] = useState<number>(0)
   const [textarea, setTextarea] = useState<string>('')
   const [commentUserExist, setCommentUserExist] = useState<boolean>(false)
@@ -107,8 +107,6 @@ export default function Explorer() {
   const loggedInUser = session.status === 'authenticated'
   const [userId, setUserId] = useState<string>()
   const [CommentUser, setCommentUser] = useState<CommentUser>()
-
-  console.log(session)
 
   useEffect(() => {
     if (session.data?.user) {
@@ -130,11 +128,11 @@ export default function Explorer() {
     if (commentUser.data.response) {
       setCommentUserExist(true)
       setShowComment(true)
+      setCommentUser(commentUser.data.response)
     } else {
       setCommentUserExist(false)
       setShowComment(false)
     }
-    setCommentUser(commentUser.data.response)
   }
 
   function handleStateModal() {
@@ -368,51 +366,7 @@ export default function Explorer() {
                   >
                     {bookDetails?.author}
                   </p>
-                  {assessment === 1 && (
-                    <Stars>
-                      <Star size={20} color="#8381D9" weight="fill" />
-                      <Star size={20} color="#8381D9" />
-                      <Star size={20} color="#8381D9" />
-                      <Star size={20} color="#8381D9" />
-                      <Star size={20} color="#8381D9" />
-                    </Stars>
-                  )}
-                  {assessment === 2 && (
-                    <Stars>
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star size={20} color="#8381D9" />
-                      <Star size={20} color="#8381D9" />
-                      <Star size={20} color="#8381D9" />
-                    </Stars>
-                  )}
-                  {assessment === 3 && (
-                    <Stars>
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star size={20} color="#8381D9" />
-                      <Star size={20} color="#8381D9" />
-                    </Stars>
-                  )}
-                  {assessment === 4 && (
-                    <Stars>
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star size={20} color="#8381D9" />
-                    </Stars>
-                  )}
-                  {assessment === 5 && (
-                    <Stars>
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star weight="fill" size={20} color="#8381D9" />
-                      <Star weight="fill" size={20} color="#8381D9" />
-                    </Stars>
-                  )}
+                  <StarsComponent idBook={bookDetails?.id} />
                   <p
                     style={{
                       fontFamily: 'Nunito Sans',
