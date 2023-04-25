@@ -99,6 +99,10 @@ export default function Home() {
     router.push('/explorer')
   }
 
+  function handleNavigationProfile() {
+    router.push('/profile')
+  }
+
   return loading ? (
     <>Carregando...</>
   ) : (
@@ -142,7 +146,12 @@ export default function Home() {
                   >
                     Sua última leitura
                   </h3>
-                  <Link direction="right" title="Ver todos" Color="blue" />
+                  <Link
+                    direction="right"
+                    title="Ver todos"
+                    Color="blue"
+                    onNavigation={handleNavigationProfile}
+                  />
                 </div>
                 <Card
                   nameBook={ratingUser.book.name}
