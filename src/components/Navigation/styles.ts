@@ -1,11 +1,6 @@
 import { styled } from '@/styles'
-import Link from 'next/link'
 
-interface Props {
-  variant: boolean
-}
-
-export const NavigationContainer = styled(Link, {
+export const NavigationContainer = styled('button', {
   position: 'relative',
   display: 'flex',
   flexDirection: 'row',
@@ -15,6 +10,9 @@ export const NavigationContainer = styled(Link, {
   justifyContent: 'flex-start',
   textDecoration: 'none',
   filter: 'var(--selected)',
+  background: 'none',
+  border: 'none',
+  cursor: 'pointer',
   p: {
     color: '$gray100',
     fontFamily: '$default',

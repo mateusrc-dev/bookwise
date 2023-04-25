@@ -17,3 +17,9 @@ export const HeaderCard = styled('div', {
   alignItems: 'center',
   gap: '1.5rem',
 })
+
+export const Stars = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.375rem',
+})

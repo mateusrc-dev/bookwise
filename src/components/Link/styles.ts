@@ -1,15 +1,16 @@
 import { styled } from '@/styles'
-import Link from 'next/link'
 
-export const LinkContainer = styled(Link, {
+export const LinkContainer = styled('button', {
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
-  backgroudColor: 'transparent',
   textDecoration: 'none',
   justifyContent: 'center',
   padding: '$2',
   borderRadius: '4px',
+  background: 'none',
+  border: 'none',
+  cursor: 'pointer',
   p: {
     fontFamily: '$default',
     fontWeight: '$bold',

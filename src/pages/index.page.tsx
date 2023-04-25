@@ -9,16 +9,22 @@ import {
   Option,
   OptionsSignIn,
 } from '@/styles/pages/signIn'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 export default function SignIn() {
   const router = useRouter()
+  const session = useSession()
+  const userLogin = session.status === 'authenticated'
 
   const hasAuthError = !!router.query.error
 
   async function handleSignIn() {
     signIn('google', { callbackUrl: 'http://localhost:3000/home' })
+  }
+
+  if (userLogin) {
+    router.push('/home')
   }
 
   return (

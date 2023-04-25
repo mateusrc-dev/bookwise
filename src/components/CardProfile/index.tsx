@@ -1,6 +1,5 @@
 import Image from 'next/image'
-import { CardProfileContainer, HeaderCard } from './styles'
-import { Stars } from '../Card/styles'
+import { CardProfileContainer, HeaderCard, Stars } from './styles'
 import { Star } from 'phosphor-react'
 
 type Props = {

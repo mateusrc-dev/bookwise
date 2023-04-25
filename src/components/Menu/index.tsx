@@ -3,7 +3,7 @@ import { ContainerNavigation, LinkLogout, MenuContainer } from './styles'
 import Logo from '../../assets/Logo.png'
 import Navigation from '../Navigation'
 import { Binoculars, ChartLineUp, SignIn, User } from 'phosphor-react'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/react'
 
 type Props = {
@@ -19,24 +19,51 @@ export default function Menu({
   selectedMenu = 'home',
   avatarUser,
 }: Props) {
-  // const router = useRouter()
+  const router = useRouter()
 
   async function deleteSession() {
     signOut({ callbackUrl: 'http://localhost:3000' })
+  }
+
+  function handleNavigationHome() {
+    router.push('/home')
+  }
+
+  function handleNavigationExplorer() {
+    router.push('/explorer')
+  }
+
+  function handleNavigationProfile() {
+    router.push('/profile')
   }
 
   return (
     <MenuContainer>
       <Image src={Logo} alt="logo" width={128} height={32} />
       <ContainerNavigation>
-        <Navigation title="Início" selected={selectedMenu === 'home'}>
+        <Navigation
+          title="Início"
+          selected={selectedMenu === 'home'}
+          onNavigation={handleNavigationHome}
+          path="home"
+        >
           <ChartLineUp size={24} color="#F8F9FC" />
         </Navigation>
-        <Navigation title="Explorer" selected={selectedMenu === 'explorer'}>
+        <Navigation
+          title="Explorer"
+          selected={selectedMenu === 'explorer'}
+          onNavigation={handleNavigationExplorer}
+          path="explorer"
+        >
           <Binoculars size={24} color="#F8F9FC" />
         </Navigation>
         {loggedInUser && (
-          <Navigation title="Perfil" selected={selectedMenu === 'profile'}>
+          <Navigation
+            title="Perfil"
+            selected={selectedMenu === 'profile'}
+            onNavigation={handleNavigationProfile}
+            path="profile"
+          >
             <User size={24} color="#F8F9FC" />
           </Navigation>
         )}

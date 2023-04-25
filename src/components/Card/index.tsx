@@ -13,6 +13,8 @@ import {
 } from './styles'
 import { useState } from 'react'
 import StarsComponent from '../Stars'
+import { Stars } from '../Stars/styles'
+import { Star } from 'phosphor-react'
 // import ShowMore from "react-show-more";
 
 type Props = {
@@ -123,7 +125,57 @@ export default function Card({
               </span>
             </div>
           </div>
-          <StarsComponent idBook={idBook} />
+          {idBook.length === 0 && (
+            <>
+              {' '}
+              {assessment === 1 && (
+                <Stars>
+                  <Star size={16} color="#8381D9" weight="fill" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                </Stars>
+              )}
+              {assessment === 2 && (
+                <Stars>
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                </Stars>
+              )}
+              {assessment === 3 && (
+                <Stars>
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                </Stars>
+              )}
+              {assessment === 4 && (
+                <Stars>
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                </Stars>
+              )}
+              {assessment === 5 && (
+                <Stars>
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                </Stars>
+              )}
+            </>
+          )}
+          {idBook.length !== 0 && <StarsComponent idBook={idBook} />}
         </HeaderWithUser>
         <BodyWithUser>
           {src !== undefined && (
@@ -201,7 +253,57 @@ export default function Card({
         <DetailsColumn>
           <HeaderCard>
             <span>Hoje</span>
-            <StarsComponent idBook={idBook} />
+            {idBook.length === 0 && (
+              <>
+                {' '}
+                {assessment === 1 && (
+                  <Stars>
+                    <Star size={16} color="#8381D9" weight="fill" />
+                    <Star size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                  </Stars>
+                )}
+                {assessment === 2 && (
+                  <Stars>
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                  </Stars>
+                )}
+                {assessment === 3 && (
+                  <Stars>
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                  </Stars>
+                )}
+                {assessment === 4 && (
+                  <Stars>
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                  </Stars>
+                )}
+                {assessment === 5 && (
+                  <Stars>
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star weight="fill" size={16} color="#8381D9" />
+                    <Star weight="fill" size={16} color="#8381D9" />
+                  </Stars>
+                )}
+              </>
+            )}
+            {idBook.length !== 0 && <StarsComponent idBook={idBook} />}
           </HeaderCard>
           <DetailsBook>
             <h1>{nameBook}</h1>
@@ -236,7 +338,57 @@ export default function Card({
             <p className="author">{author}</p>
           </DetailsBook>
 
-          <StarsComponent idBook={idBook} />
+          {idBook.length === 0 && (
+            <>
+              {' '}
+              {assessment === 1 && (
+                <Stars>
+                  <Star size={16} color="#8381D9" weight="fill" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                </Stars>
+              )}
+              {assessment === 2 && (
+                <Stars>
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                </Stars>
+              )}
+              {assessment === 3 && (
+                <Stars>
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                </Stars>
+              )}
+              {assessment === 4 && (
+                <Stars>
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                </Stars>
+              )}
+              {assessment === 5 && (
+                <Stars>
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                  <Star weight="fill" size={16} color="#8381D9" />
+                </Stars>
+              )}
+            </>
+          )}
+          {idBook.length !== 0 && <StarsComponent idBook={idBook} />}
         </DetailsColumn>
       </ContainerCard>
     )

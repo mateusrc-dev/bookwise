@@ -17,7 +17,6 @@ export default function Link({
   return (
     <LinkContainer
       style={direction === 'right' ? { gap: '8px' } : { gap: '12px' }}
-      href=""
       onClick={onNavigation}
     >
       {direction === 'left' && <CaretLeft size={20} color="#E6E8F2" />}

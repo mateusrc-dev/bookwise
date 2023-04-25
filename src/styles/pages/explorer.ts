@@ -40,7 +40,7 @@ export const ExplorerContainer = styled('div', {
       flexDirection: 'column',
       marginLeft: 'auto',
       background: '$gray800',
-      maxHeight: '100vh',
+      height: '100vh',
       overflow: 'auto',
       width: '41.25rem',
       padding: '4rem 3rem',

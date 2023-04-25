@@ -24,6 +24,11 @@ export default async function handler(
       user_id: session.user.id,
     },
     include: { user: true, book: true },
+    orderBy: [
+      {
+        id: 'desc',
+      },
+    ],
   })
 
   return res.json({ response })

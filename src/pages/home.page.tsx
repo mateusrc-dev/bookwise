@@ -51,7 +51,7 @@ export default function Home() {
 
   const isSignedIn = session.status === 'authenticated'
 
-  console.log(session)
+  console.log(booksPopular)
 
   useEffect(() => {
     if (isSignedIn) {
