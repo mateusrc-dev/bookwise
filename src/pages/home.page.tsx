@@ -12,87 +12,100 @@ import Link from '@/components/Link'
 import Card from '@/components/Card'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { api } from '@/lib/axios'
 import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
+import { getServerSession } from 'next-auth'
+import { buildNextAuthOptions } from './api/auth/[...nextauth].api'
+import { prisma } from '@/lib/prisma'
 
-type Ratings = {
-  book: {
-    author: string
-    cover_url: string
+type Props = {
+  ratings: {
+    book: {
+      author: string
+      cover_url: string
+      created_at: string
+      id: string
+      name: string
+      summary: string
+      total_pages: number
+    }
+    book_id: string
     created_at: string
+    description: string
     id: string
-    name: string
-    summary: string
-    total_pages: number
-  }
-  book_id: string
-  created_at: string
-  description: string
-  id: string
-  rate: number
-  user_id: string
-  user: {
-    avatar_url: string
+    rate: number
+    user_id: string
+    user: {
+      avatar_url: string
+      created_at: string
+      email: string
+      id: string
+      name: string
+    }
+  }[]
+  booksPopular: {
+    book: {
+      author: string
+      cover_url: string
+      created_at: string
+      id: string
+      name: string
+      summary: string
+      total_pages: number
+    }
+    book_id: string
     created_at: string
-    email: string
+    description: string
     id: string
-    name: string
+    rate: number
+    user_id: string
+    user: {
+      avatar_url: string
+      created_at: string
+      email: string
+      id: string
+      name: string
+    }
+  }[]
+  ratingUser: {
+    book: {
+      author: string
+      cover_url: string
+      created_at: string
+      id: string
+      name: string
+      summary: string
+      total_pages: number
+    }
+    book_id: string
+    created_at: string
+    description: string
+    id: string
+    rate: number
+    user_id: string
+    user: {
+      avatar_url: string
+      created_at: string
+      email: string
+      id: string
+      name: string
+    }
   }
 }
 
-export default function Home() {
+export default function Home({ ratings, booksPopular, ratingUser }: Props) {
   const [loggedInUser, setLoggedInUser] = useState<boolean>(false)
-  const [ratings, setRatings] = useState<Ratings[]>([])
-  const [ratingUser, setRatingUser] = useState<Ratings>()
-  const [booksPopular, setBooksPopular] = useState<Ratings[]>([])
-  const [loading, setLoading] = useState(false)
   const session: any = useSession()
   const router = useRouter()
 
-  const isSignedIn = session.status === 'authenticated'
+  console.log(ratings)
 
-  console.log(booksPopular)
+  const isSignedIn = session.status === 'authenticated'
 
   useEffect(() => {
     if (isSignedIn) {
       setLoggedInUser(isSignedIn)
     }
-  }, [isSignedIn])
-
-  useEffect(() => {
-    setLoading(true)
-    async function handleRatings() {
-      if (isSignedIn) {
-        const ratingsAll = await api.get('/users/getAllRatings')
-        setRatings(ratingsAll.data.response)
-      }
-    }
-    setLoading(false)
-    handleRatings()
-  }, [isSignedIn])
-
-  useEffect(() => {
-    setLoading(true)
-    async function handleUserRating() {
-      if (isSignedIn) {
-        const ratingUser = await api.get('/users/getFirstRatingUser')
-        setRatingUser(ratingUser.data.response)
-      }
-    }
-    setLoading(false)
-    handleUserRating()
-  }, [isSignedIn])
-
-  useEffect(() => {
-    setLoading(true)
-    async function handleBooksPopular() {
-      if (isSignedIn) {
-        const ratingUser = await api.get('/users/getBooksPopular')
-        setBooksPopular(ratingUser.data.response)
-      }
-    }
-    setLoading(false)
-    handleBooksPopular()
   }, [isSignedIn])
 
   function handleNavigationExplorer() {
@@ -103,9 +116,7 @@ export default function Home() {
     router.push('/profile')
   }
 
-  return loading ? (
-    <>Carregando...</>
-  ) : (
+  return (
     <HomeContainer>
       <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         {loggedInUser ? (
@@ -260,4 +271,55 @@ export default function Home() {
       </BodyContainer>
     </HomeContainer>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session: any = await getServerSession(
+    req,
+    res,
+    buildNextAuthOptions(req, res),
+  )
+
+  const ratings: any = await prisma.rating.findMany({
+    where: {
+      NOT: {
+        user_id: session?.user?.id,
+      },
+    },
+    include: { user: true, book: true },
+  })
+
+  const booksPopular = await prisma.rating.findMany({
+    orderBy: [
+      {
+        rate: 'desc',
+      },
+    ],
+    include: {
+      book: true,
+      user: true,
+    },
+    take: 4,
+  })
+
+  const ratingUser = await prisma.rating.findFirst({
+    where: {
+      user_id: session.user.id,
+    },
+    include: { user: true, book: true },
+    orderBy: [
+      {
+        id: 'desc',
+      },
+    ],
+  })
+
+  return {
+    props: {
+      session,
+      ratings: JSON.parse(JSON.stringify(ratings)),
+      booksPopular: JSON.parse(JSON.stringify(booksPopular)),
+      ratingUser: JSON.parse(JSON.stringify(ratingUser)),
+    },
+  }
 }
