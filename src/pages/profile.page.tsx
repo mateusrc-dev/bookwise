@@ -11,13 +11,22 @@ import CardProfile from '@/components/CardProfile'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { api } from '@/lib/axios'
+import { prisma } from '@/lib/prisma'
+import { GetServerSideProps } from 'next'
+import { buildNextAuthOptions } from './api/auth/[...nextauth].api'
+import { getServerSession } from 'next-auth'
+import dayjs from 'dayjs'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
 type UserProps = {
-  avatar_url: string
-  created_at: string
-  email: string
-  id: string
-  name: string
+  user: {
+    avatar_url: string
+    created_at: string
+    email: string
+    id: string
+    name: string
+  }
 }
 
 type RatingsUser = {
@@ -46,8 +55,7 @@ type RatingsUser = {
   user_id: string
 }
 
-export default function Profile() {
-  const [user, setUser] = useState<UserProps>()
+export default function Profile({ user }: UserProps) {
   const [ratingsUser, setRatingsUser] = useState<RatingsUser[]>([])
   const [textInput, setTextInput] = useState<string>('')
   const [authors, setAuthors] = useState<string[]>([])
@@ -122,14 +130,6 @@ export default function Profile() {
   }, [ratingsUser])
 
   useEffect(() => {
-    async function handleFindUser() {
-      const userDetails = await api.get('/users/getUser')
-      setUser(userDetails.data.response)
-    }
-    handleFindUser()
-  }, [])
-
-  useEffect(() => {
     async function handleFindRatingsUser() {
       const ratingsUser = await api.get('/users/getAllRatingsUser', {
         params: { nameString: textInput },
@@ -187,7 +187,10 @@ export default function Profile() {
                   color: '#D1D6E4',
                 }}
               >
-                Há 2 dias
+                {formatDistanceToNow(new Date(item.created_at), {
+                  addSuffix: true,
+                  locale: ptBR,
+                })}
               </p>
               <CardProfile
                 assessment={item.rate}
@@ -243,7 +246,7 @@ export default function Profile() {
               color: '#8D95AF',
             }}
           >
-            membro desde 2019
+            membro desde {dayjs(user.created_at).year()}
           </span>
           <div
             style={{
@@ -426,4 +429,25 @@ export default function Profile() {
       </ContentProfile>
     </ProfileContainer>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session: any = await getServerSession(
+    req,
+    res,
+    buildNextAuthOptions(req, res),
+  )
+
+  const user = await prisma.user.findFirst({
+    where: {
+      id: session.user.id,
+    },
+  })
+
+  return {
+    props: {
+      session,
+      user: JSON.parse(JSON.stringify(user)),
+    },
+  }
 }

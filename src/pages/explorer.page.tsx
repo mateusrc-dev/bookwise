@@ -30,6 +30,8 @@ import GithubIcon from '../assets/githubIcon.png'
 import { api } from '@/lib/axios'
 import { useSession } from 'next-auth/react'
 import StarsComponent from '@/components/Stars'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
 type Book = {
   author: string
@@ -611,6 +613,13 @@ export default function Explorer() {
                       assessmentProp={CommentUser?.rate}
                       description={CommentUser?.description}
                       commentUser={true}
+                      date={
+                        CommentUser &&
+                        formatDistanceToNow(new Date(CommentUser.created_at), {
+                          addSuffix: true,
+                          locale: ptBR,
+                        })
+                      }
                     />
                   ) : (
                     <CreateNewComment>
@@ -889,6 +898,10 @@ export default function Explorer() {
                       userName={item.user.name}
                       assessmentProp={item.rate}
                       description={item.description}
+                      date={formatDistanceToNow(new Date(item.created_at), {
+                        addSuffix: true,
+                        locale: ptBR,
+                      })}
                     />
                   ),
               )}
@@ -1014,6 +1027,10 @@ export default function Explorer() {
                 assessment={3}
                 onClickCard={handleBookDetails}
                 idBook={item.id}
+                date={formatDistanceToNow(new Date(item.created_at), {
+                  addSuffix: true,
+                  locale: ptBR,
+                })}
               />
             ))}
           </CardsContainer>
@@ -1033,6 +1050,10 @@ export default function Explorer() {
                         assessment={3}
                         onClickCard={handleBookDetails}
                         idBook={item.id}
+                        date={formatDistanceToNow(new Date(item.created_at), {
+                          addSuffix: true,
+                          locale: ptBR,
+                        })}
                       />
                     ),
                 ),

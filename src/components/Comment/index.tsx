@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { BodyComment, CommentContainer, HeaderComment, Stars } from './styles'
 import { Star } from 'phosphor-react'
+import { ReactNode } from 'react'
 
 type Props = {
   userImage: string | undefined
@@ -8,6 +9,7 @@ type Props = {
   assessmentProp: number | undefined
   description: string | undefined
   commentUser?: boolean
+  date: ReactNode
 }
 
 export default function Comment({
@@ -16,6 +18,7 @@ export default function Comment({
   assessmentProp = 0,
   description = '',
   commentUser = false,
+  date,
 }: Props) {
   return (
     <CommentContainer
@@ -75,7 +78,7 @@ export default function Comment({
                 color: '#8D95AF',
               }}
             >
-              Hoje
+              {date}
             </span>
           </div>
         </div>

@@ -11,7 +11,7 @@ import {
   ImageColumn,
   ShowMoreText,
 } from './styles'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import StarsComponent from '../Stars'
 import { Stars } from '../Stars/styles'
 import { Star } from 'phosphor-react'
@@ -29,6 +29,7 @@ type Props = {
   userImage?: string | undefined
   onClickCard?: (id: string) => void
   idBook?: string | undefined
+  date: ReactNode
 }
 
 export default function Card({
@@ -43,6 +44,7 @@ export default function Card({
   userImage,
   onClickCard = () => {},
   idBook = '',
+  date,
 }: Props) {
   const [showText, setShowText] = useState<boolean>(true)
 
@@ -121,7 +123,7 @@ export default function Card({
                   color: '#8D95AF',
                 }}
               >
-                Hoje
+                {date}
               </span>
             </div>
           </div>
@@ -252,7 +254,7 @@ export default function Card({
         )}
         <DetailsColumn>
           <HeaderCard>
-            <span>Hoje</span>
+            <span>{date}</span>
             {idBook.length === 0 && (
               <>
                 {' '}

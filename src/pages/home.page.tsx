@@ -17,6 +17,8 @@ import { GetServerSideProps } from 'next'
 import { getServerSession } from 'next-auth'
 import { buildNextAuthOptions } from './api/auth/[...nextauth].api'
 import { prisma } from '@/lib/prisma'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
 type Props = {
   ratings: {
@@ -98,8 +100,6 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
   const session: any = useSession()
   const router = useRouter()
 
-  console.log(ratings)
-
   const isSignedIn = session.status === 'authenticated'
 
   useEffect(() => {
@@ -170,6 +170,10 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
                   author={ratingUser.book.author}
                   description={ratingUser.description}
                   src={`/${ratingUser.book.cover_url}`.replace('/public', '')}
+                  date={formatDistanceToNow(new Date(ratingUser.created_at), {
+                    addSuffix: true,
+                    locale: ptBR,
+                  })}
                 />
               </>
             )}
@@ -205,6 +209,10 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
                   description={rating.description}
                   src={`/${rating.book.cover_url}`.replace('/public', '')}
                   userImage={`${rating.user.avatar_url}`}
+                  date={formatDistanceToNow(new Date(rating.created_at), {
+                    addSuffix: true,
+                    locale: ptBR,
+                  })}
                 />
               ))}
             </div>
@@ -263,6 +271,10 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
                   description={book.description}
                   src={`/${book.book.cover_url}`.replace('/public', '')}
                   type="small"
+                  date={formatDistanceToNow(new Date(book.created_at), {
+                    addSuffix: true,
+                    locale: ptBR,
+                  })}
                 />
               ))}
             </div>
