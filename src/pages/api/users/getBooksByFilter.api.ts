@@ -11,16 +11,21 @@ export default async function handler(
 
   const { nameString }: any = req.query
 
-  const responseSearchByName = await prisma.book.findMany({
-    include: {
-      categories: true,
-    },
-    where: {
-      name: {
-        contains: nameString,
+  let responseSearchByName
+  try {
+    responseSearchByName = await prisma.book.findMany({
+      include: {
+        categories: true,
       },
-    },
-  })
+      where: {
+        name: {
+          contains: nameString,
+        },
+      },
+    })
+  } catch (err) {
+    console.log(err)
+  }
 
   return res.json({ responseSearchByName })
 }

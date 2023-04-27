@@ -5,7 +5,14 @@ import {
   SecondColumn,
   ThirdColumn,
 } from '@/styles/pages/profile'
-import { BookOpen, BookmarkSimple, Books, User, UserList } from 'phosphor-react'
+import {
+  BookOpen,
+  BookmarkSimple,
+  Books,
+  User,
+  UserList,
+  Warning,
+} from 'phosphor-react'
 import Input from '@/components/Input'
 import CardProfile from '@/components/CardProfile'
 import Image from 'next/image'
@@ -65,8 +72,6 @@ export default function Profile({ user }: UserProps) {
   const [biggerOccurrence, setBiggerOccurrence] = useState<string | undefined>(
     '',
   )
-
-  console.log(user)
 
   function handleSearch(text: string) {
     setTextInput(text)
@@ -203,6 +208,34 @@ export default function Profile({ user }: UserProps) {
               />
             </>
           ))}
+          {ratingsUser.length === 0 && (
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <h1
+                style={{
+                  marginTop: '6rem',
+                  fontSize: '1rem',
+                  textAlign: 'center',
+                }}
+              >
+                Você ainda não fez nenhuma avaliação, vá na página explorer e
+                crie sua primeira avaliação!
+              </h1>
+              <Warning
+                size={100}
+                style={{
+                  margin: '2rem',
+                }}
+              />
+            </div>
+          )}
         </SecondColumn>
         <ThirdColumn>
           <div
@@ -440,11 +473,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     buildNextAuthOptions(req, res),
   )
 
-  const user = await prisma.user.findFirst({
-    where: {
-      id: session.user.id,
-    },
-  })
+  let user
+  try {
+    user = await prisma.user.findFirst({
+      where: {
+        id: session.user.id,
+      },
+    })
+  } catch (err) {
+    console.log(err)
+  }
 
   return {
     props: {

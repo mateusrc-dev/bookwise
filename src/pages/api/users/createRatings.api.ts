@@ -28,21 +28,24 @@ export default async function handler(
   }
 
   const props: Props = req.body
-  console.log(props)
 
-  await prisma.rating.create({
-    data: {
-      id: uuidv4(),
-      rate: props.rate,
-      description: props.description,
-      user: {
-        connect: { id: props.userId },
+  try {
+    await prisma.rating.create({
+      data: {
+        id: uuidv4(),
+        rate: props.rate,
+        description: props.description,
+        user: {
+          connect: { id: props.userId },
+        },
+        book: {
+          connect: { id: props.bookId },
+        },
       },
-      book: {
-        connect: { id: props.bookId },
-      },
-    },
-  })
+    })
+  } catch (err) {
+    console.log(err)
+  }
 
   return res.status(201).end()
 }

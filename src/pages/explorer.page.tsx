@@ -116,8 +116,6 @@ export default function Explorer() {
     }
   }, [session])
 
-  console.log(session.data)
-
   async function handleBookDetails(bookId: string) {
     handleStateModal()
     const books = await api.get('/users/getBook', {

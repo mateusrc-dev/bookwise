@@ -11,21 +11,26 @@ export default async function handler(
 
   const { idBook }: any = req.query
 
-  const responseBook = await prisma.book.findFirst({
-    include: {
-      categories: true,
-      ratings: {
-        include: {
-          user: true,
+  let responseBook
+  try {
+    responseBook = await prisma.book.findFirst({
+      include: {
+        categories: true,
+        ratings: {
+          include: {
+            user: true,
+          },
         },
       },
-    },
-    where: {
-      id: {
-        contains: idBook,
+      where: {
+        id: {
+          contains: idBook,
+        },
       },
-    },
-  })
+    })
+  } catch (err) {
+    console.log(err)
+  }
 
   return res.json({ responseBook })
 }

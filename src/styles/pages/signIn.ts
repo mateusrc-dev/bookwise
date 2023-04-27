@@ -64,6 +64,7 @@ export const Option = styled('button', {
   textDecoration: 'none',
   width: '23.25rem',
   borderRadius: '8px',
+  border: 'none',
   strong: {
     fontFamily: '$default',
     fontWeight: '$bold',

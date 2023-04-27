@@ -20,13 +20,17 @@ export default async function handler(
 
   let response
   if (session) {
-    response = await prisma.rating.findFirst({
-      where: {
-        user_id: session?.user?.id,
-        book_id: idBook,
-      },
-      include: { user: true },
-    })
+    try {
+      response = await prisma.rating.findFirst({
+        where: {
+          user_id: session?.user?.id,
+          book_id: idBook,
+        },
+        include: { user: true },
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   if (session) {

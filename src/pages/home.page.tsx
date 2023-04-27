@@ -298,41 +298,55 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     buildNextAuthOptions(req, res),
   )
 
-  const ratings: any = await prisma.rating.findMany({
-    where: {
-      NOT: {
-        user_id: session?.user?.id,
-      },
-    },
-    include: { user: true, book: true },
-  })
-
-  const booksPopular = await prisma.rating.findMany({
-    orderBy: [
-      {
-        rate: 'desc',
-      },
-    ],
-    include: {
-      book: true,
-      user: true,
-    },
-    take: 4,
-  })
-
-  let ratingUser
-  if (session) {
-    ratingUser = await prisma.rating.findFirst({
+  let ratings
+  try {
+    ratings = await prisma.rating.findMany({
       where: {
-        user_id: session.user.id,
+        NOT: {
+          user_id: session?.user?.id,
+        },
       },
       include: { user: true, book: true },
+    })
+  } catch (err) {
+    console.log(err)
+  }
+
+  let booksPopular
+  try {
+    booksPopular = await prisma.rating.findMany({
       orderBy: [
         {
-          id: 'desc',
+          rate: 'desc',
         },
       ],
+      include: {
+        book: true,
+        user: true,
+      },
+      take: 4,
     })
+  } catch (err) {
+    console.log(err)
+  }
+
+  let ratingUser
+  try {
+    if (session) {
+      ratingUser = await prisma.rating.findFirst({
+        where: {
+          user_id: session.user.id,
+        },
+        include: { user: true, book: true },
+        orderBy: [
+          {
+            id: 'desc',
+          },
+        ],
+      })
+    }
+  } catch (err) {
+    console.log(err)
   }
 
   if (session) {
