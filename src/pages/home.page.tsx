@@ -65,28 +65,13 @@ type Props = {
     }
   }[]
   booksPopular: {
-    book: {
-      author: string
-      cover_url: string
-      created_at: string
-      id: string
-      name: string
-      summary: string
-      total_pages: number
-    }
-    book_id: string
+    author: string
+    cover_url: string
     created_at: string
-    description: string
     id: string
-    rate: number
-    user_id: string
-    user: {
-      avatar_url: string
-      created_at: string
-      email: string
-      id: string
-      name: string
-    }
+    name: string
+    summary: string
+    total_pages: number
   }[]
   ratingUser: {
     book: {
@@ -173,6 +158,8 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
   const [commentUserExist, setCommentUserExist] = useState<boolean>(false)
   const [userNote, setUserNote] = useState<number>(0)
   const [messageError, setMessageError] = useState<string>('')
+
+  console.log(booksPopular)
 
   useEffect(() => {
     if (session.data?.user) {
@@ -1083,18 +1070,17 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
               {booksPopular.map((book) => (
                 <Card
                   key={String(book.id)}
-                  nameBook={book.book.name}
-                  assessment={book.rate}
-                  author={book.user.name}
-                  description={book.description}
-                  src={`/${book.book.cover_url}`.replace('/public', '')}
+                  nameBook={book.name}
+                  assessment={3}
+                  author={book.author}
+                  src={`/${book.cover_url}`.replace('/public', '')}
                   type="small"
                   date={formatDistanceToNow(new Date(book.created_at), {
                     addSuffix: true,
                     locale: ptBR,
                   })}
                   onClickCard={handleBookDetails}
-                  idBook={book.book.id}
+                  idBook={book.id}
                 />
               ))}
             </div>
@@ -1128,16 +1114,12 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 
   let booksPopular
   try {
-    booksPopular = await prisma.rating.findMany({
+    booksPopular = await prisma.book.findMany({
       orderBy: [
         {
-          rate: 'desc',
+          ratings: { _count: 'desc' },
         },
       ],
-      include: {
-        book: true,
-        user: true,
-      },
       take: 4,
     })
   } catch (err) {
