@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse, NextPageContext } from 'next'
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import { PrismaAdapter } from '@/lib/auth/prisma-adapter'
 import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google'
+import GitHubProvider from 'next-auth/providers/github'
 
 export function buildNextAuthOptions(
   req: NextApiRequest | NextPageContext['req'],
@@ -11,6 +12,24 @@ export function buildNextAuthOptions(
     adapter: PrismaAdapter(req, res),
 
     providers: [
+      GitHubProvider({
+        clientId: process.env.GITHUB_ID ?? '',
+        clientSecret: process.env.GITHUB_SECRET ?? '',
+        authorization: {
+          params: {
+            scope:
+              'https://github.com/login/oauth/authorize?client_id=6a67486461ea94952c03&scope=user',
+          },
+        },
+        profile: (profile: any) => {
+          return {
+            id: profile.id ?? profile.id,
+            name: profile.name ?? profile.name,
+            email: profile.email ?? profile.email,
+            avatar_url: profile.avatar_url ?? profile.avatar_url,
+          }
+        },
+      }),
       GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID ?? '',
         clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
@@ -32,14 +51,7 @@ export function buildNextAuthOptions(
     ],
 
     callbacks: {
-      async signIn({ account }) {
-        if (
-          !account?.scope?.includes(
-            'https://www.googleapis.com/auth/userinfo.profile',
-          )
-        ) {
-          return '/home/?error=permissions'
-        }
+      async signIn() {
         return true
       },
 

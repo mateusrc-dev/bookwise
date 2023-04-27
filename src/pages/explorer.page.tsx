@@ -116,6 +116,8 @@ export default function Explorer() {
     }
   }, [session])
 
+  console.log(session.data)
+
   async function handleBookDetails(bookId: string) {
     handleStateModal()
     const books = await api.get('/users/getBook', {
@@ -608,7 +610,11 @@ export default function Explorer() {
                 <>
                   {commentUserExist ? (
                     <Comment
-                      userImage={CommentUser?.user.avatar_url}
+                      userImage={
+                        CommentUser?.user.avatar_url
+                          ? CommentUser?.user.avatar_url
+                          : ''
+                      }
                       userName={CommentUser?.user.name}
                       assessmentProp={CommentUser?.rate}
                       description={CommentUser?.description}
@@ -643,7 +649,11 @@ export default function Explorer() {
                             }}
                           >
                             <Image
-                              src={session.data.user.avatar_url}
+                              src={
+                                session.data.user.avatar_url
+                                  ? session.data.user.avatar_url
+                                  : ''
+                              }
                               alt="imagem do usuário"
                               width={40}
                               height={40}

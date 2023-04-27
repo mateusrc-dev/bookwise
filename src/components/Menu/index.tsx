@@ -37,6 +37,10 @@ export default function Menu({
     router.push('/profile')
   }
 
+  function handleNavigationSignIn() {
+    router.push('/')
+  }
+
   return (
     <MenuContainer>
       <Image src={Logo} alt="logo" width={128} height={32} />
@@ -69,7 +73,7 @@ export default function Menu({
         )}
       </ContainerNavigation>
       {loggedInUser ? (
-        <LinkLogout href="" onClick={deleteSession}>
+        <LinkLogout onClick={deleteSession}>
           <div
             style={{
               display: 'flex',
@@ -95,7 +99,7 @@ export default function Menu({
           <SignIn size={20} color="#F75A68" />
         </LinkLogout>
       ) : (
-        <LinkLogout href="">
+        <LinkLogout onClick={handleNavigationSignIn}>
           <p>Fazer login</p>
           <SignIn size={20} color="#50B2C0" />
         </LinkLogout>

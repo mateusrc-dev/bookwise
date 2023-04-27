@@ -66,6 +66,8 @@ export default function Profile({ user }: UserProps) {
     '',
   )
 
+  console.log(user)
+
   function handleSearch(text: string) {
     setTextInput(text)
   }

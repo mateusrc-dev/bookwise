@@ -1,5 +1,4 @@
 import { styled } from '@/styles'
-import Link from 'next/link'
 
 export const MenuContainer = styled('div', {
   display: 'flex',
@@ -15,10 +14,12 @@ export const MenuContainer = styled('div', {
   backgroundPositionY: '-480px',
 })
 
-export const LinkLogout = styled(Link, {
+export const LinkLogout = styled('button', {
   marginTop: 'auto',
   display: 'flex',
   alignItems: 'center',
+  background: 'none',
+  border: 'none',
   gap: '$3',
   textDecoration: 'none',
   fontFamily: '$default',
@@ -26,6 +27,7 @@ export const LinkLogout = styled(Link, {
   fontSize: '$md',
   lineHeight: '$base',
   color: '$gray200',
+  cursor: 'pointer',
   '&:hover': {
     filter: 'brightness(0.7)',
   },

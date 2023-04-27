@@ -121,7 +121,11 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
       <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         {loggedInUser ? (
           <Menu
-            avatarUser={session.data?.user?.avatar_url}
+            avatarUser={
+              session.data?.user?.avatar_url
+                ? session.data?.user?.avatar_url
+                : ''
+            }
             nameUser={session.data?.user?.name}
             loggedInUser={true}
           />
@@ -208,7 +212,9 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
                   userName={rating.user.name}
                   description={rating.description}
                   src={`/${rating.book.cover_url}`.replace('/public', '')}
-                  userImage={`${rating.user.avatar_url}`}
+                  userImage={`${
+                    rating.user.avatar_url ? rating.user.avatar_url : ''
+                  }`}
                   date={formatDistanceToNow(new Date(rating.created_at), {
                     addSuffix: true,
                     locale: ptBR,
@@ -314,24 +320,36 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     take: 4,
   })
 
-  const ratingUser = await prisma.rating.findFirst({
-    where: {
-      user_id: session.user.id,
-    },
-    include: { user: true, book: true },
-    orderBy: [
-      {
-        id: 'desc',
+  let ratingUser
+  if (session) {
+    ratingUser = await prisma.rating.findFirst({
+      where: {
+        user_id: session.user.id,
       },
-    ],
-  })
+      include: { user: true, book: true },
+      orderBy: [
+        {
+          id: 'desc',
+        },
+      ],
+    })
+  }
 
-  return {
-    props: {
-      session,
-      ratings: JSON.parse(JSON.stringify(ratings)),
-      booksPopular: JSON.parse(JSON.stringify(booksPopular)),
-      ratingUser: JSON.parse(JSON.stringify(ratingUser)),
-    },
+  if (session) {
+    return {
+      props: {
+        session,
+        ratings: JSON.parse(JSON.stringify(ratings)),
+        booksPopular: JSON.parse(JSON.stringify(booksPopular)),
+        ratingUser: JSON.parse(JSON.stringify(ratingUser)),
+      },
+    }
+  } else {
+    return {
+      props: {
+        ratings: JSON.parse(JSON.stringify(ratings)),
+        booksPopular: JSON.parse(JSON.stringify(booksPopular)),
+      },
+    }
   }
 }

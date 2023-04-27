@@ -19,11 +19,19 @@ export default function SignIn() {
 
   const hasAuthError = !!router.query.error
 
-  async function handleSignIn() {
+  async function handleSignInGoogle() {
     signIn('google', { callbackUrl: 'http://localhost:3000/home' })
   }
 
+  async function handleSignInGithub() {
+    signIn('github', { callbackUrl: 'http://localhost:3000/home' })
+  }
+
   if (userLogin) {
+    router.push('/home')
+  }
+
+  function handleNavigationHome() {
     router.push('/home')
   }
 
@@ -52,7 +60,7 @@ export default function SignIn() {
             <strong>Faça seu login ou acesse como visitante.</strong>
           </div>
           <OptionsSignIn>
-            <Option onClick={handleSignIn}>
+            <Option onClick={handleSignInGoogle}>
               <Image
                 src={GoogleIcon}
                 alt="ícone do google"
@@ -62,7 +70,7 @@ export default function SignIn() {
               <strong>Entrar com o Google</strong>
             </Option>
             {hasAuthError && <p>Falha ao se conectar com o Google!</p>}
-            <Option>
+            <Option onClick={handleSignInGithub}>
               <Image
                 src={GithubIcon}
                 alt="ícone do github"
@@ -71,7 +79,7 @@ export default function SignIn() {
               />
               <strong>Entrar com o GitHub</strong>
             </Option>
-            <Option>
+            <Option onClick={handleNavigationHome}>
               <Image
                 src={RocketIcon}
                 alt="ícone da rocket"

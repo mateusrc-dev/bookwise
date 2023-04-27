@@ -15,19 +15,23 @@ export default async function handler(
     res,
     buildNextAuthOptions(req, res),
   )
-  if (!session) {
-    return res.status(401).end()
-  }
 
   const { idBook }: any = req.query
 
-  const response = await prisma.rating.findFirst({
-    where: {
-      user_id: session?.user?.id,
-      book_id: idBook,
-    },
-    include: { user: true },
-  })
+  let response
+  if (session) {
+    response = await prisma.rating.findFirst({
+      where: {
+        user_id: session?.user?.id,
+        book_id: idBook,
+      },
+      include: { user: true },
+    })
+  }
 
-  return res.json({ response })
+  if (session) {
+    return res.json({ response })
+  } else {
+    return res.status(201).end()
+  }
 }
