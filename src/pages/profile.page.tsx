@@ -25,6 +25,7 @@ import { getServerSession } from 'next-auth'
 import dayjs from 'dayjs'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
+import ShowLoading from '@/components/Loading'
 
 type UserProps = {
   user: {
@@ -64,6 +65,7 @@ type RatingsUser = {
 
 export default function Profile({ user }: UserProps) {
   const [ratingsUser, setRatingsUser] = useState<RatingsUser[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
   const [textInput, setTextInput] = useState<string>('')
   const [authors, setAuthors] = useState<string[]>([])
   const [numberPages, setNumberPages] = useState<number>(0)
@@ -138,10 +140,17 @@ export default function Profile({ user }: UserProps) {
 
   useEffect(() => {
     async function handleFindRatingsUser() {
-      const ratingsUser = await api.get('/users/getAllRatingsUser', {
-        params: { nameString: textInput },
-      })
-      setRatingsUser(ratingsUser.data.response)
+      try {
+        setLoading(true)
+        const ratingsUser = await api.get('/users/getAllRatingsUser', {
+          params: { nameString: textInput },
+        })
+        setRatingsUser(ratingsUser.data.response)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        setLoading(false)
+      }
     }
     handleFindRatingsUser()
   }, [textInput])
@@ -208,34 +217,37 @@ export default function Profile({ user }: UserProps) {
               />
             </>
           ))}
-          {ratingsUser.length === 0 && (
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <h1
+          {ratingsUser.length === 0 &&
+            (loading ? (
+              <ShowLoading />
+            ) : (
+              <div
                 style={{
-                  marginTop: '6rem',
-                  fontSize: '1rem',
-                  textAlign: 'center',
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
-                Você ainda não fez nenhuma avaliação, vá na página explorer e
-                crie sua primeira avaliação!
-              </h1>
-              <Warning
-                size={100}
-                style={{
-                  margin: '2rem',
-                }}
-              />
-            </div>
-          )}
+                <h1
+                  style={{
+                    marginTop: '6rem',
+                    fontSize: '1rem',
+                    textAlign: 'center',
+                  }}
+                >
+                  Você ainda não fez nenhuma avaliação, vá na página explorer e
+                  crie sua primeira avaliação!
+                </h1>
+                <Warning
+                  size={100}
+                  style={{
+                    margin: '2rem',
+                  }}
+                />
+              </div>
+            ))}
         </SecondColumn>
         <ThirdColumn>
           <div
