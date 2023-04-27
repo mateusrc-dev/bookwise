@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { styled } from '..'
 
 export const ExplorerContainer = styled('div', {
@@ -195,7 +194,7 @@ export const OptionsSignIn = styled('div', {
   gap: '$4',
 })
 
-export const Option = styled(Link, {
+export const Option = styled('button', {
   backgroundColor: '$gray600',
   display: 'flex',
   flexDirection: 'row',
@@ -205,6 +204,8 @@ export const Option = styled(Link, {
   textDecoration: 'none',
   width: '23.25rem',
   borderRadius: '8px',
+  border: 'none',
+  cursor: 'pointer',
   strong: {
     fontFamily: '$default',
     fontWeight: '$bold',

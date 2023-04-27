@@ -28,7 +28,7 @@ import Comment from '@/components/Comment'
 import GoogleIcon from '../assets/googleIcon.png'
 import GithubIcon from '../assets/githubIcon.png'
 import { api } from '@/lib/axios'
-import { useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import StarsComponent from '@/components/Stars'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
@@ -115,6 +115,14 @@ export default function Explorer() {
       setUserId(session.data?.user?.id)
     }
   }, [session])
+
+  async function handleSignInGoogle() {
+    signIn('google', { callbackUrl: 'http://localhost:3000/explorer' })
+  }
+
+  async function handleSignInGithub() {
+    signIn('github', { callbackUrl: 'http://localhost:3000/explorer' })
+  }
 
   async function handleBookDetails(bookId: string) {
     handleStateModal()
@@ -939,7 +947,7 @@ export default function Explorer() {
               Faça login para deixar sua avaliação
             </h3>
             <OptionsSignIn>
-              <Option href="">
+              <Option onClick={handleSignInGoogle}>
                 <Image
                   src={GoogleIcon}
                   alt="ícone do google"
@@ -948,7 +956,7 @@ export default function Explorer() {
                 />
                 <strong>Entrar com o Google</strong>
               </Option>
-              <Option href="">
+              <Option onClick={handleSignInGithub}>
                 <Image
                   src={GithubIcon}
                   alt="ícone do github"

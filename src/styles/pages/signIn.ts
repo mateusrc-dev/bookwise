@@ -65,6 +65,7 @@ export const Option = styled('button', {
   width: '23.25rem',
   borderRadius: '8px',
   border: 'none',
+  cursor: 'pointer',
   strong: {
     fontFamily: '$default',
     fontWeight: '$bold',
