@@ -205,7 +205,7 @@ export default function Card({
                   }}
                 >
                   <span className="description">
-                    {description.slice(0, -50)}...{' '}
+                    {description.slice(0, 230)}...
                     {showText && (
                       <ShowMoreText onClick={handleShowMoreText}>
                         ver mais

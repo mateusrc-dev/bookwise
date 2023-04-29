@@ -202,7 +202,7 @@ export default function Explorer() {
 
   function handleTextarea(string: string) {
     if (textarea.length >= 450) {
-      setTextarea(string.slice(0, -1))
+      setTextarea(string.slice(0, 450))
     } else {
       setTextarea(string)
     }

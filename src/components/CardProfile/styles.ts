@@ -10,6 +10,16 @@ export const CardProfileContainer = styled('div', {
   background: '$gray700',
   borderRadius: '8px',
   marginBottom: '1.5rem',
+  '.description': {
+    display: '-webkit-box',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    '-webkit-line-clamp': 4,
+    '-webkit-box-orient': 'vertical',
+    fontFamily: '$default',
+    fontWeight: '$regular',
+    fontSize: '$sm',
+  },
 })
 
 export const HeaderCard = styled('div', {

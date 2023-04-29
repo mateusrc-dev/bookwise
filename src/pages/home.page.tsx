@@ -268,7 +268,7 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
 
   function handleTextarea(string: string) {
     if (textarea.length >= 450) {
-      setTextarea(string.slice(0, -1))
+      setTextarea(string.slice(0, 450))
     } else {
       setTextarea(string)
     }
@@ -280,6 +280,7 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
     } else {
       setMessageError('')
       try {
+        setLoading(true)
         await api.post('/users/createRatings', {
           bookId: bookDetails?.id,
           userId,
@@ -290,6 +291,8 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
         handleStateModal()
       } catch (error) {
         console.log(error)
+      } finally {
+        setLoading(false)
       }
     }
   }

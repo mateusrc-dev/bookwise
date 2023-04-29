@@ -99,17 +99,7 @@ export default function CardProfile({
         </div>
       </HeaderCard>
       <div style={{ marginTop: '1.5rem' }}>
-        <span
-          style={{
-            fontFamily: 'Nunito Sans',
-            fontWeight: 400,
-            fontSize: '14px',
-            lineHeight: '160%',
-            color: '#D1D6E4',
-          }}
-        >
-          {description}
-        </span>
+        <p className="description">{description}</p>
       </div>
     </CardProfileContainer>
   )
