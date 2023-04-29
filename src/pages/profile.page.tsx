@@ -157,6 +157,7 @@ export default function Profile({ user }: UserProps) {
 
   return (
     <ProfileContainer>
+      {loading && <ShowLoading />}
       <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         <Menu
           loggedInUser={true}
@@ -219,7 +220,7 @@ export default function Profile({ user }: UserProps) {
           ))}
           {ratingsUser.length === 0 &&
             (loading ? (
-              <ShowLoading />
+              <div></div>
             ) : (
               <div
                 style={{

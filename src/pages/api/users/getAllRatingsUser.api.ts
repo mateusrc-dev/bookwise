@@ -35,6 +35,7 @@ export default async function handler(
           },
         },
       },
+      orderBy: [{ created_at: 'desc' }],
     })
   } catch (err) {
     console.log(err)

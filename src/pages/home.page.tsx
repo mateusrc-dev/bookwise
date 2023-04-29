@@ -1135,6 +1135,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
         },
       },
       include: { user: true, book: true },
+      orderBy: [{ created_at: 'desc' }],
     })
   } catch (err) {
     console.log(err)
@@ -1164,7 +1165,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
         include: { user: true, book: true },
         orderBy: [
           {
-            id: 'asc',
+            created_at: 'desc',
           },
         ],
       })
