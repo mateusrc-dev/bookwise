@@ -12,7 +12,7 @@ export const Container = styled('div', {
     position: 'absolute',
     zIndex: 2,
     width: '100%',
-    height: '100%',
+    height: '100vh',
     top: 0,
     display: 'flex',
     alignItems: 'center',

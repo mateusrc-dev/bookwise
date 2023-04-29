@@ -11,32 +11,45 @@ import {
 } from '@/styles/pages/signIn'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import ShowLoading from '@/components/Loading'
 
 export default function SignIn() {
   const router = useRouter()
   const session = useSession()
   const userLogin = session.status === 'authenticated'
+  const [loading, setLoading] = useState<boolean>(false)
 
   const hasAuthError = !!router.query.error
 
   async function handleSignInGoogle() {
+    setLoading(true)
     signIn('google', { callbackUrl: 'http://localhost:3000/home' })
   }
 
   async function handleSignInGithub() {
+    setLoading(true)
     signIn('github', { callbackUrl: 'http://localhost:3000/home' })
   }
 
-  if (userLogin) {
-    router.push('/home')
-  }
+  useEffect(() => {
+    function handleUserLogin() {
+      if (userLogin) {
+        setLoading(true)
+        router.push('/home')
+      }
+    }
+    handleUserLogin()
+  }, [userLogin, router])
 
   function handleNavigationHome() {
+    setLoading(true)
     router.push('/home')
   }
 
   return (
     <ContainerSignIn>
+      {loading && <ShowLoading />}
       <div>
         <Image
           src={ImageSignIn}
