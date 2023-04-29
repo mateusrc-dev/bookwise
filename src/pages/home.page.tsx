@@ -253,10 +253,12 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
   }, [isSignedIn])
 
   function handleNavigationExplorer() {
+    setLoading(true)
     router.push('/explorer')
   }
 
   function handleNavigationProfile() {
+    setLoading(true)
     router.push('/profile')
   }
 
