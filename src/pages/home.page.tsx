@@ -168,11 +168,13 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
   }, [session])
 
   async function handleSignInGoogle() {
-    signIn('google', { callbackUrl: 'http://localhost:3000/explorer' })
+    setLoading(true)
+    signIn('google', { callbackUrl: 'http://localhost:3000/home' })
   }
 
   async function handleSignInGithub() {
-    signIn('github', { callbackUrl: 'http://localhost:3000/explorer' })
+    setLoading(true)
+    signIn('github', { callbackUrl: 'http://localhost:3000/home' })
   }
 
   async function handleBookDetails(bookId: string) {
@@ -292,6 +294,7 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
 
   return (
     <HomeContainer>
+      {loading && <ShowLoading />}
       {handleModal &&
         (loading ? (
           <ShowLoading />

@@ -119,10 +119,12 @@ export default function Explorer() {
   }, [session])
 
   async function handleSignInGoogle() {
+    setLoading(true)
     signIn('google', { callbackUrl: 'http://localhost:3000/explorer' })
   }
 
   async function handleSignInGithub() {
+    setLoading(true)
     signIn('github', { callbackUrl: 'http://localhost:3000/explorer' })
   }
 

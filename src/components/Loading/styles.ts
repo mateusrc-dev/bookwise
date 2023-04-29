@@ -10,7 +10,7 @@ export const Container = styled('div', {
   '.loading': {
     background: 'rgba(0, 0, 0, 0.8)',
     position: 'absolute',
-    zIndex: 2,
+    zIndex: 4,
     width: '100%',
     height: '100vh',
     top: 0,
