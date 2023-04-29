@@ -25,7 +25,7 @@ import { getServerSession } from 'next-auth'
 import dayjs from 'dayjs'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
-import ShowLoading from '@/components/Loading'
+import ShowLoadingSmall from '@/components/LoadingSmall'
 
 type UserProps = {
   user: {
@@ -157,7 +157,7 @@ export default function Profile({ user }: UserProps) {
 
   return (
     <ProfileContainer>
-      {loading && <ShowLoading />}
+      {loading && <ShowLoadingSmall title="Carregando..." />}
       <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         <Menu
           loggedInUser={true}
@@ -238,8 +238,7 @@ export default function Profile({ user }: UserProps) {
                     textAlign: 'center',
                   }}
                 >
-                  Você ainda não fez nenhuma avaliação, vá na página explorer e
-                  crie sua primeira avaliação!
+                  Não foi encontrado nenhuma avaliação!
                 </h1>
                 <Warning
                   size={100}

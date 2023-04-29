@@ -33,6 +33,7 @@ import StarsComponent from '@/components/Stars'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import ShowLoading from '@/components/Loading'
+import ShowLoadingSmall from '@/components/LoadingSmall'
 
 type Book = {
   author: string
@@ -111,6 +112,7 @@ export default function Explorer() {
   const [userId, setUserId] = useState<string>()
   const [CommentUser, setCommentUser] = useState<CommentUser>()
   const [loading, setLoading] = useState<boolean>(false)
+  const [loadingFind, setLoadingFind] = useState<boolean>(false)
 
   useEffect(() => {
     if (session.data?.user) {
@@ -339,12 +341,19 @@ export default function Explorer() {
 
   useEffect(() => {
     async function handleBooks() {
-      const books = await api.get('/users/getBooksByFilter', {
-        params: {
-          nameString: find,
-        },
-      })
-      setBooks(books.data.responseSearchByName)
+      try {
+        setLoadingFind(true)
+        const books = await api.get('/users/getBooksByFilter', {
+          params: {
+            nameString: find,
+          },
+        })
+        setBooks(books.data.responseSearchByName)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        setLoadingFind(false)
+      }
     }
     handleBooks()
   }, [find, tags])
@@ -352,6 +361,7 @@ export default function Explorer() {
   return (
     <ExplorerContainer>
       {loading && <ShowLoading />}
+      {loadingFind && <ShowLoadingSmall title="Carregando..." />}
       {handleModal &&
         (loading ? (
           <ShowLoading />
