@@ -26,6 +26,7 @@ import dayjs from 'dayjs'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import ShowLoadingSmall from '@/components/LoadingSmall'
+import { NextSeo } from 'next-seo'
 
 type UserProps = {
   user: {
@@ -157,6 +158,7 @@ export default function Profile({ user }: UserProps) {
 
   return (
     <ProfileContainer>
+      <NextSeo title={`Perfil ${user.name} | BookWise`} />
       {loading && <ShowLoadingSmall title="Carregando..." />}
       <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         <Menu

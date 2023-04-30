@@ -34,6 +34,7 @@ import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import ShowLoading from '@/components/Loading'
 import ShowLoadingSmall from '@/components/LoadingSmall'
+import { NextSeo } from 'next-seo'
 
 type Book = {
   author: string
@@ -360,6 +361,9 @@ export default function Explorer() {
 
   return (
     <ExplorerContainer>
+      <NextSeo
+        title={`Busque por livros ${session.data.user.name} | BookWise`}
+      />
       {loading && <ShowLoading />}
       {loadingFind && <ShowLoadingSmall title="Carregando..." />}
       {handleModal &&

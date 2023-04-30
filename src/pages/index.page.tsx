@@ -13,6 +13,7 @@ import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import ShowLoading from '@/components/Loading'
+import { NextSeo } from 'next-seo'
 
 export default function SignIn() {
   const router = useRouter()
@@ -49,6 +50,10 @@ export default function SignIn() {
 
   return (
     <ContainerSignIn>
+      <NextSeo
+        title={`Entre na sua conta | BookWise`}
+        description="Faça a avaliação dos seus livros favoritos e tenha um controle das suas leituras e avaliações."
+      />
       {loading && <ShowLoading />}
       <div>
         <Image

@@ -39,6 +39,7 @@ import Comment from '@/components/Comment'
 import GoogleIcon from '../assets/googleIcon.png'
 import GithubIcon from '../assets/githubIcon.png'
 import ShowLoading from '@/components/Loading'
+import { NextSeo } from 'next-seo'
 
 type Props = {
   ratings: {
@@ -299,6 +300,7 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
 
   return (
     <HomeContainer>
+      <NextSeo title={`Seja bem vindo ${session.data.user.name} | BookWise`} />
       {loading && <ShowLoading />}
       {handleModal &&
         (loading ? (
