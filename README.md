@@ -1,4 +1,4 @@
-# Ignite's ReactJs track project in production...
+# Ignite's ReactJs track project
 
 ## Project created in NextJs and Typescript
 

@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider     = "sqlite"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
@@ -53,6 +54,8 @@ model CategoriesOnBooks {
   category Category @relation(fields: [categoryId], references: [id])
 
   @@id([book_id, categoryId])
+  @@index([book_id])
+  @@index([categoryId])
 }
 
 model Rating {
@@ -67,6 +70,8 @@ model Rating {
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
 
+  @@index([book_id])
+  @@index([user_id])
   @@map("ratings")
 }
 
@@ -86,6 +91,7 @@ model Account {
   user                User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@unique([provider, provider_account_id])
+  @@index([user_id])
   @@map("accounts")
 }
 
@@ -96,5 +102,6 @@ model Session {
   expires       DateTime
   user          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
+  @@index([user_id])
   @@map("sessions")
 }
