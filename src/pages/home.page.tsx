@@ -300,7 +300,14 @@ export default function Home({ ratings, booksPopular, ratingUser }: Props) {
 
   return (
     <HomeContainer>
-      <NextSeo title={`Seja bem vindo ${session.data.user.name} | BookWise`} />
+      {session.data?.user?.name && (
+        <NextSeo
+          title={`Seja bem vindo ${session.data?.user?.name}! | BookWise`}
+        />
+      )}
+      {!session.data?.user?.name && (
+        <NextSeo title={`Seja bem vindo! | BookWise`} />
+      )}
       {loading && <ShowLoading />}
       {handleModal &&
         (loading ? (

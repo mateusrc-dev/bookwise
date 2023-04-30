@@ -18,7 +18,13 @@ import {
   TextArea,
   ToAssess,
 } from '@/styles/pages/explorer'
-import { Binoculars, BookOpen, BookmarkSimple, Star } from 'phosphor-react'
+import {
+  Binoculars,
+  BookOpen,
+  BookmarkSimple,
+  Star,
+  Warning,
+} from 'phosphor-react'
 import { useEffect, useState } from 'react'
 import Tag from '@/components/Tag'
 import Card from '@/components/Card'
@@ -361,9 +367,13 @@ export default function Explorer() {
 
   return (
     <ExplorerContainer>
-      <NextSeo
-        title={`Busque por livros ${session.data.user.name} | BookWise`}
-      />
+      {session.data?.user?.name ? (
+        <NextSeo
+          title={`Busque por livros ${session.data?.user?.name}! | BookWise`}
+        />
+      ) : (
+        <NextSeo title={`Busque por livros! | BookWise`} />
+      )}
       {loading && <ShowLoading />}
       {loadingFind && <ShowLoadingSmall title="Carregando..." />}
       {handleModal &&
@@ -1125,6 +1135,22 @@ export default function Explorer() {
               ),
             )}
           </CardsContainer>
+        )}
+        {book.length === 0 && (
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              marginTop: '5rem',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '2rem',
+            }}
+          >
+            <h1>Não foi possível encontrar nenhum livro!</h1>
+            <Warning size="100" />
+          </div>
         )}
       </ExplorerContent>
     </ExplorerContainer>

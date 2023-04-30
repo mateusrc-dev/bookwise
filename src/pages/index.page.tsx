@@ -51,7 +51,7 @@ export default function SignIn() {
   return (
     <ContainerSignIn>
       <NextSeo
-        title={`Entre na sua conta | BookWise`}
+        title={`Entre na sua conta! | BookWise`}
         description="Faça a avaliação dos seus livros favoritos e tenha um controle das suas leituras e avaliações."
       />
       {loading && <ShowLoading />}
