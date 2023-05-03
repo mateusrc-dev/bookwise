@@ -88,15 +88,6 @@ export default function SignIn() {
               <strong>Entrar com o Google</strong>
             </Option>
             {hasAuthError && <p>Falha ao se conectar com o Google!</p>}
-            <Option onClick={handleSignInGithub}>
-              <Image
-                src={GithubIcon}
-                alt="ícone do github"
-                width={32}
-                height={32}
-              />
-              <strong>Entrar com o GitHub</strong>
-            </Option>
             <Option onClick={handleNavigationHome}>
               <Image
                 src={RocketIcon}
