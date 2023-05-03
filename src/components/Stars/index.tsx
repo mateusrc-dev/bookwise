@@ -11,7 +11,6 @@ export default function StarsComponent({ idBook }: Props) {
   const [ratingsBook, setRatingsBook] = useState<any>([])
   const [assessment, setAssessment] = useState<number>(0)
   const [rates, setRates] = useState<number[]>([])
-  console.log(assessment)
 
   useEffect(() => {
     let sum: number = 0
