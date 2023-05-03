@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import ImageSignIn from '../assets/ImageSignIn.png'
 import GoogleIcon from '../assets/googleIcon.png'
-// import GithubIcon from '../assets/githubIcon.png'
+import GithubIcon from '../assets/githubIcon.png'
 import RocketIcon from '../assets/rocketIcon.png'
 import {
   ColumnTwo,
@@ -28,10 +28,10 @@ export default function SignIn() {
     signIn('google', { callbackUrl: 'http://localhost:3000/home' })
   }
 
-  /* async function handleSignInGithub() {
+  async function handleSignInGithub() {
     setLoading(true)
     signIn('github', { callbackUrl: 'http://localhost:3000/home' })
-  } */
+  }
 
   useEffect(() => {
     function handleUserLogin() {
@@ -88,6 +88,16 @@ export default function SignIn() {
               <strong>Entrar com o Google</strong>
             </Option>
             {hasAuthError && <p>Falha ao se conectar com o Google!</p>}
+            <Option onClick={handleSignInGithub}>
+              <Image
+                src={GithubIcon}
+                alt="ícone do google"
+                width={32}
+                height={32}
+              />
+              <strong>Entrar com o GitHub</strong>
+            </Option>
+            {hasAuthError && <p>Falha ao se conectar com o Github!</p>}
             <Option onClick={handleNavigationHome}>
               <Image
                 src={RocketIcon}
