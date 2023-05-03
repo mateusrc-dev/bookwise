@@ -51,6 +51,15 @@ export default function CardProfile({
           >
             {author}
           </p>
+          {assessment === 0 && (
+            <Stars>
+              <Star size={16} color="#8381D9" />
+              <Star size={16} color="#8381D9" />
+              <Star size={16} color="#8381D9" />
+              <Star size={16} color="#8381D9" />
+              <Star size={16} color="#8381D9" />
+            </Stars>
+          )}
           {assessment === 1 && (
             <Stars>
               <Star size={16} color="#8381D9" weight="fill" />

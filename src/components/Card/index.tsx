@@ -37,7 +37,7 @@ export default function Card({
   nameBook,
   author,
   description = "Passe a propriedade 'description' para inserir uma descrição desse filme!",
-  assessment,
+  assessment = 0,
   userName = "Passe a propriedade 'userName' para inserir o nome do usuário!",
   type = 'big',
   cardWithUser = false,
@@ -130,6 +130,15 @@ export default function Card({
           {idBook.length === 0 && (
             <>
               {' '}
+              {assessment === 0 && (
+                <Stars>
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                </Stars>
+              )}
               {assessment === 1 && (
                 <Stars>
                   <Star size={16} color="#8381D9" weight="fill" />
@@ -258,6 +267,15 @@ export default function Card({
             {idBook.length === 0 && (
               <>
                 {' '}
+                {assessment === 0 && (
+                  <Stars>
+                    <Star size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                    <Star size={16} color="#8381D9" />
+                  </Stars>
+                )}
                 {assessment === 1 && (
                   <Stars>
                     <Star size={16} color="#8381D9" weight="fill" />
@@ -343,6 +361,15 @@ export default function Card({
           {idBook.length === 0 && (
             <>
               {' '}
+              {assessment === 0 && (
+                <Stars>
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                  <Star size={16} color="#8381D9" />
+                </Stars>
+              )}
               {assessment === 1 && (
                 <Stars>
                   <Star size={16} color="#8381D9" weight="fill" />

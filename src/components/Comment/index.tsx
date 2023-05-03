@@ -82,6 +82,15 @@ export default function Comment({
             </span>
           </div>
         </div>
+        {assessmentProp === 0 && (
+          <Stars>
+            <Star size={20} color="#8381D9" />
+            <Star size={20} color="#8381D9" />
+            <Star size={20} color="#8381D9" />
+            <Star size={20} color="#8381D9" />
+            <Star size={20} color="#8381D9" />
+          </Stars>
+        )}
         {assessmentProp === 1 && (
           <Stars>
             <Star size={20} color="#8381D9" weight="fill" />

@@ -11,6 +11,7 @@ export default function StarsComponent({ idBook }: Props) {
   const [ratingsBook, setRatingsBook] = useState<any>([])
   const [assessment, setAssessment] = useState<number>(0)
   const [rates, setRates] = useState<number[]>([])
+  console.log(assessment)
 
   useEffect(() => {
     let sum: number = 0
@@ -41,6 +42,24 @@ export default function StarsComponent({ idBook }: Props) {
 
   return (
     <>
+      {isNaN(assessment) && (
+        <Stars>
+          <Star size={16} color="#8381D9" />
+          <Star size={16} color="#8381D9" />
+          <Star size={16} color="#8381D9" />
+          <Star size={16} color="#8381D9" />
+          <Star size={16} color="#8381D9" />
+        </Stars>
+      )}
+      {assessment === 0 && (
+        <Stars>
+          <Star size={16} color="#8381D9" />
+          <Star size={16} color="#8381D9" />
+          <Star size={16} color="#8381D9" />
+          <Star size={16} color="#8381D9" />
+          <Star size={16} color="#8381D9" />
+        </Stars>
+      )}
       {assessment === 1 && (
         <Stars>
           <Star size={16} color="#8381D9" weight="fill" />
