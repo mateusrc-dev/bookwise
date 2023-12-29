@@ -23,8 +23,8 @@ export default function StarsComponent({ idBook }: Props) {
 
   useEffect(() => {
     const rates: number[] = []
-    for (let i = 0; ratingsBook.length > i; i++) {
-      rates.push(ratingsBook[i].rate)
+    for (let i = 0; ratingsBook?.length > i; i++) {
+      rates.push(ratingsBook[i]?.rate)
     }
     setRates(rates)
   }, [ratingsBook])
@@ -34,7 +34,7 @@ export default function StarsComponent({ idBook }: Props) {
       const ratingsBook = await api.get('/users/getBook', {
         params: { idBook },
       })
-      setRatingsBook(ratingsBook.data.responseBook.ratings)
+      setRatingsBook(ratingsBook?.data?.responseBook?.ratings)
     }
     handleFindRatingsUser()
   }, [idBook])

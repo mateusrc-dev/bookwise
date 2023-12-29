@@ -1191,6 +1191,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     console.log(err)
   }
 
+  console.log(booksPopular)
+
   if (session) {
     return {
       props: {

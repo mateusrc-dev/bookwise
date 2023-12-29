@@ -153,7 +153,7 @@ export default function Explorer() {
       if (commentUser.data.response) {
         setCommentUserExist(true)
         setShowComment(true)
-        setCommentUser(commentUser.data.response)
+        setCommentUser(commentUser?.data?.response)
       } else {
         setCommentUserExist(false)
         setShowComment(false)
@@ -728,7 +728,7 @@ export default function Explorer() {
                                 color: '#F8F9FC',
                               }}
                             >
-                              {session.data.user.name}
+                              {session?.data?.user?.name}
                             </span>
                           </div>
                           {userNote === 0 && (
@@ -958,7 +958,7 @@ export default function Explorer() {
                     )}
                   </>
                 )}
-                {bookDetails?.ratings.map(
+                {bookDetails?.ratings?.map(
                   (item) =>
                     item.user_id !== userId && (
                       <Comment
@@ -1025,8 +1025,8 @@ export default function Explorer() {
       <div style={{ padding: '1.25rem 0 1.25rem 1.25rem' }}>
         {loggedInUser ? (
           <Menu
-            avatarUser={session.data?.user?.avatar_url}
-            nameUser={session.data?.user?.name}
+            avatarUser={session?.data?.user?.avatar_url}
+            nameUser={session?.data?.user?.name}
             loggedInUser={true}
             selectedMenu="explorer"
           />
@@ -1088,7 +1088,7 @@ export default function Explorer() {
           <ShowLoadingSmall title="Carregando..." />
         ) : categoryId.length === 0 ? (
           <CardsContainer>
-            {book.map((item) => (
+            {book?.map((item) => (
               <Card
                 key={String(item.id)}
                 type="small"
@@ -1107,8 +1107,8 @@ export default function Explorer() {
           </CardsContainer>
         ) : (
           <CardsContainer>
-            {book.map((item) =>
-              categoryId.map((id) =>
+            {book?.map((item) =>
+              categoryId?.map((id) =>
                 item.categories.map(
                   (Id) =>
                     Id.categoryId === id && (
