@@ -18,3 +18,8 @@
 You can clone the project to your pc.
 To run it use the command: npm run dev.
 To open the database use the command: npx prisma studio.
+You need to create a .env file and put the variable values according to .env.example - for example, put the database url (must be postgresql), and fill in the possible variations to perform social authentication with google and github
+
+You can also access the link to deploy and test the application online: bookwise-livid.vercel.app (note there is a request limit because the free plan is being used to host the database - if there are many requests, error 500 )
+
+## deploy: bookwise-livid.vercel.app
